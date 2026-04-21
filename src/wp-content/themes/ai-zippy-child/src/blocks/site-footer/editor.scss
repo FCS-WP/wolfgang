@@ -1,0 +1,15 @@
+.site-footer-editor__media {
+  display: grid;
+  gap: 8px;
+}
+
+.site-footer-editor__media div,
+.site-footer-editor__media img {
+  background: #f6f2eb;
+  border: 1px solid #e7e1d8;
+  display: block;
+  max-width: 100%;
+  min-height: 70px;
+  object-fit: contain;
+  padding: 12px;
+}

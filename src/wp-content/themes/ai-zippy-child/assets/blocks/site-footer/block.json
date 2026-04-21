@@ -1,0 +1,51 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ai-zippy-child/site-footer",
+  "version": "1.0.0",
+  "title": "Site Footer",
+  "category": "ai-zippy",
+  "icon": "editor-kitchensink",
+  "description": "Clean project footer shell with editable logo, menu, and copyright.",
+  "supports": {
+    "html": false,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "logoId": {
+      "type": "number",
+      "default": 0
+    },
+    "logoUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "logoAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
+    "menuId": {
+      "type": "number",
+      "default": 0
+    },
+    "copyright": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "textdomain": "ai-zippy-child",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}
