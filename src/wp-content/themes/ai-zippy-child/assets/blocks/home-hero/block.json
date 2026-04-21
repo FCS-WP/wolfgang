@@ -1,0 +1,89 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ai-zippy-child/home-hero",
+  "version": "1.0.0",
+  "title": "Home - Hero",
+  "category": "ai-zippy",
+  "icon": "cover-image",
+  "description": "Homepage hero with background image, campaign copy, and two CTA buttons.",
+  "keywords": [
+    "home",
+    "hero",
+    "banner",
+    "gift"
+  ],
+  "supports": {
+    "html": false,
+    "align": [
+      "full"
+    ]
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": "Singapore's go-to toy & gift store"
+    },
+    "heading": {
+      "type": "string",
+      "default": "The Right Gift,\nEvery Time."
+    },
+    "description": {
+      "type": "string",
+      "default": "From first birthdays to last-minute finds - curated toys & gifts that always land well. Online and in-store across Singapore."
+    },
+    "primaryButtonText": {
+      "type": "string",
+      "default": "Shop All Toys"
+    },
+    "primaryButtonUrl": {
+      "type": "string",
+      "default": "/shop"
+    },
+    "secondaryButtonText": {
+      "type": "string",
+      "default": "Join T&S Points"
+    },
+    "secondaryButtonUrl": {
+      "type": "string",
+      "default": "/rewards"
+    },
+    "backgroundImageId": {
+      "type": "number",
+      "default": 0
+    },
+    "backgroundImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "backgroundImageAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "imageObjectFit": {
+      "type": "string",
+      "default": "cover"
+    },
+    "imageObjectPosition": {
+      "type": "string",
+      "default": "center center"
+    },
+    "minHeight": {
+      "type": "number",
+      "default": 850
+    },
+    "overlayOpacity": {
+      "type": "number",
+      "default": 48
+    }
+  },
+  "textdomain": "ai-zippy-child",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}
