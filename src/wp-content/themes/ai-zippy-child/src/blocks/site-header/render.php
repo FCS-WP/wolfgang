@@ -5,8 +5,14 @@ $attrs = wp_parse_args($attributes ?? [], [
     'logoUrl' => '',
     'logoAlt' => '',
     'menuId' => 0,
-    'ctaText' => '',
-    'ctaUrl' => '',
+    'fallbackLinks' => [
+        ['label' => 'Home', 'url' => '/'],
+        ['label' => 'Our Story', 'url' => '/our-story'],
+        ['label' => 'Our Services', 'url' => '/our-services'],
+        ['label' => 'Our Projects', 'url' => '/our-projects'],
+    ],
+    'ctaText' => 'Contact us',
+    'ctaUrl' => '/contact-us',
 ]);
 
 $menu_items = [];
@@ -14,6 +20,7 @@ if (!empty($attrs['menuId'])) {
     $items = wp_get_nav_menu_items(absint($attrs['menuId']));
     $menu_items = is_array($items) ? array_filter($items, static fn($item) => (int) $item->menu_item_parent === 0) : [];
 }
+$fallback_links = is_array($attrs['fallbackLinks']) ? $attrs['fallbackLinks'] : [];
 
 $wrapper_attributes = get_block_wrapper_attributes(['class' => 'site-header']);
 ?>
@@ -23,15 +30,26 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'site-header']);
             <?php if (!empty($attrs['logoUrl'])) : ?>
                 <img src="<?php echo esc_url($attrs['logoUrl']); ?>" alt="<?php echo esc_attr($attrs['logoAlt'] ?: get_bloginfo('name')); ?>">
             <?php else : ?>
-                <span><?php echo esc_html(get_bloginfo('name')); ?></span>
+                <span class="site-header__logo-text" aria-label="<?php echo esc_attr(get_bloginfo('name')); ?>">
+                    <span><?php esc_html_e('Wolfgang', 'ai-zippy-child'); ?></span>
+                    <strong><?php esc_html_e('Methos', 'ai-zippy-child'); ?></strong>
+                </span>
             <?php endif; ?>
         </a>
 
-        <?php if ($menu_items) : ?>
+        <?php if ($menu_items || $fallback_links) : ?>
             <nav class="site-header__nav" aria-label="<?php esc_attr_e('Primary menu', 'ai-zippy-child'); ?>">
-                <?php foreach ($menu_items as $item) : ?>
-                    <a href="<?php echo esc_url($item->url); ?>"><?php echo esc_html($item->title); ?></a>
-                <?php endforeach; ?>
+                <?php if ($menu_items) : ?>
+                    <?php foreach ($menu_items as $item) : ?>
+                        <a href="<?php echo esc_url($item->url); ?>"><?php echo esc_html($item->title); ?></a>
+                    <?php endforeach; ?>
+                <?php else : ?>
+                    <?php foreach ($fallback_links as $link) : ?>
+                        <?php $link = wp_parse_args((array) $link, ['label' => '', 'url' => '#']); ?>
+                        <?php if (trim((string) $link['label']) === '') { continue; } ?>
+                        <a href="<?php echo esc_url($link['url'] ?: '#'); ?>"><?php echo esc_html($link['label']); ?></a>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             </nav>
         <?php endif; ?>
 

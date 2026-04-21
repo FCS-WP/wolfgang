@@ -1,10 +1,13 @@
 import { InspectorControls, MediaUpload, MediaUploadCheck, RichText, URLInputButton, useBlockProps } from "@wordpress/block-editor";
-import { Button, PanelBody, SelectControl } from "@wordpress/components";
+import { Button, PanelBody, SelectControl, TextControl } from "@wordpress/components";
 import { useEffect, useState } from "@wordpress/element";
 import apiFetch from "@wordpress/api-fetch";
 
+const asItems = (items) => (Array.isArray(items) ? items : []);
+
 export default function Edit({ attributes, setAttributes }) {
 	const [menus, setMenus] = useState([]);
+	const fallbackLinks = asItems(attributes.fallbackLinks);
 	const blockProps = useBlockProps({ className: "site-footer" });
 
 	useEffect(() => {
@@ -17,6 +20,9 @@ export default function Edit({ attributes, setAttributes }) {
 		{ label: "No menu selected", value: 0 },
 		...menus.map((menu) => ({ label: menu.name, value: menu.id })),
 	];
+	const updateFallbackLink = (index, patch) => {
+		setAttributes({ fallbackLinks: fallbackLinks.map((link, linkIndex) => (linkIndex === index ? { ...link, ...patch } : link)) });
+	};
 
 	return (
 		<>
@@ -40,18 +46,35 @@ export default function Edit({ attributes, setAttributes }) {
 					</MediaUploadCheck>
 					<SelectControl label="Menu" value={attributes.menuId} options={menuOptions} onChange={(menuId) => setAttributes({ menuId: Number(menuId) })} />
 				</PanelBody>
+				<PanelBody title="Fallback Links" initialOpen={false}>
+					{fallbackLinks.map((link, index) => (
+						<div className="site-footer-editor__group" key={`${link.label}-${index}`}>
+							<TextControl label="Label" value={link.label} onChange={(label) => updateFallbackLink(index, { label })} />
+							<p>URL</p>
+							<URLInputButton url={link.url} onChange={(url) => updateFallbackLink(index, { url })} />
+						</div>
+					))}
+				</PanelBody>
 			</InspectorControls>
 			<footer {...blockProps}>
 				<div className="site-footer__inner">
 					<div className="site-footer__brand">
-						{attributes.logoUrl ? <img src={attributes.logoUrl} alt="" /> : <span>{document.title || "Site Logo"}</span>}
-						<RichText tagName="p" value={attributes.description} onChange={(description) => setAttributes({ description })} placeholder="Footer description" />
+						{attributes.logoUrl ? <img src={attributes.logoUrl} alt="" /> : (
+							<span className="site-footer__logo-text">
+								<span>Wolfgang</span>
+								<strong>Methos</strong>
+							</span>
+						)}
+						<RichText tagName="p" className="site-footer__description" value={attributes.description} onChange={(description) => setAttributes({ description })} placeholder="Footer description" />
 					</div>
 					<nav className="site-footer__nav" aria-label="Footer">
-						<span>Choose a WordPress menu in the block settings.</span>
+						{fallbackLinks.map((link, index) => <span key={`${link.label}-${index}`}>{link.label}</span>)}
 					</nav>
+					<div className="site-footer__contact">
+						<RichText tagName="p" value={attributes.contactText} onChange={(contactText) => setAttributes({ contactText })} placeholder="Contact details" />
+						<RichText tagName="p" className="site-footer__copyright" value={attributes.copyright} onChange={(copyright) => setAttributes({ copyright })} placeholder="Copyright text" />
+					</div>
 				</div>
-				<RichText tagName="p" className="site-footer__copyright" value={attributes.copyright} onChange={(copyright) => setAttributes({ copyright })} placeholder="Copyright text" />
 			</footer>
 		</>
 	);

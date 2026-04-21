@@ -4,7 +4,7 @@
   "name": "ai-zippy-child/site-header",
   "version": "1.0.0",
   "title": "Site Header",
-  "category": "ai-zippy",
+  "category": "ai-zippy-site",
   "icon": "admin-site",
   "description": "Clean project header shell with editable logo, menu, and CTA.",
   "supports": {
@@ -34,13 +34,34 @@
       "type": "number",
       "default": 0
     },
+    "fallbackLinks": {
+      "type": "array",
+      "default": [
+        {
+          "label": "Home",
+          "url": "/"
+        },
+        {
+          "label": "Our Story",
+          "url": "/our-story"
+        },
+        {
+          "label": "Our Services",
+          "url": "/our-services"
+        },
+        {
+          "label": "Our Projects",
+          "url": "/our-projects"
+        }
+      ]
+    },
     "ctaText": {
       "type": "string",
-      "default": ""
+      "default": "Contact us"
     },
     "ctaUrl": {
       "type": "string",
-      "default": ""
+      "default": "/contact-us"
     }
   },
   "textdomain": "ai-zippy-child",

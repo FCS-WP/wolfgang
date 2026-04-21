@@ -3,8 +3,11 @@ import { Button, PanelBody, SelectControl, TextControl } from "@wordpress/compon
 import { useEffect, useState } from "@wordpress/element";
 import apiFetch from "@wordpress/api-fetch";
 
+const asItems = (items) => (Array.isArray(items) ? items : []);
+
 export default function Edit({ attributes, setAttributes }) {
 	const [menus, setMenus] = useState([]);
+	const fallbackLinks = asItems(attributes.fallbackLinks);
 	const blockProps = useBlockProps({ className: "site-header" });
 
 	useEffect(() => {
@@ -17,6 +20,11 @@ export default function Edit({ attributes, setAttributes }) {
 		{ label: "No menu selected", value: 0 },
 		...menus.map((menu) => ({ label: menu.name, value: menu.id })),
 	];
+	const updateFallbackLink = (index, patch) => {
+		setAttributes({
+			fallbackLinks: fallbackLinks.map((link, linkIndex) => (linkIndex === index ? { ...link, ...patch } : link)),
+		});
+	};
 
 	return (
 		<>
@@ -43,14 +51,28 @@ export default function Edit({ attributes, setAttributes }) {
 					<p>CTA URL</p>
 					<URLInputButton url={attributes.ctaUrl} onChange={(ctaUrl) => setAttributes({ ctaUrl })} />
 				</PanelBody>
+				<PanelBody title="Fallback Links" initialOpen={false}>
+					{fallbackLinks.map((link, index) => (
+						<div className="site-header-editor__group" key={`${link.label}-${index}`}>
+							<TextControl label="Label" value={link.label} onChange={(label) => updateFallbackLink(index, { label })} />
+							<p>URL</p>
+							<URLInputButton url={link.url} onChange={(url) => updateFallbackLink(index, { url })} />
+						</div>
+					))}
+				</PanelBody>
 			</InspectorControls>
 			<header {...blockProps}>
 				<div className="site-header__inner">
 					<div className="site-header__brand">
-						{attributes.logoUrl ? <img src={attributes.logoUrl} alt="" /> : <span>{document.title || "Site Logo"}</span>}
+						{attributes.logoUrl ? <img src={attributes.logoUrl} alt="" /> : (
+							<span className="site-header__logo-text">
+								<span>Wolfgang</span>
+								<strong>Methos</strong>
+							</span>
+						)}
 					</div>
 					<nav className="site-header__nav" aria-label="Primary">
-						<span>Choose a WordPress menu in the block settings.</span>
+						{fallbackLinks.map((link, index) => <span key={`${link.label}-${index}`}>{link.label}</span>)}
 					</nav>
 					{attributes.ctaText ? <span className="site-header__cta">{attributes.ctaText}</span> : null}
 				</div>
