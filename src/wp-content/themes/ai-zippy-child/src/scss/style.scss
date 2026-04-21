@@ -1,92 +1,193 @@
-// Child global styles (optional).
+// Child global styles.
 @use 'form';
 @use 'socials';
 
 :root {
-    --az-section-max-width: 1735px;
-    --az-section-x-padding: clamp(24px, 7vw, 96px);
-    --az-section-heading-size: clamp(34px, 3.85vw, 72px);
-    --az-button-bg: var(--home-age-guide-red, #ed302b);
-    --az-button-color: #fff;
-    --az-button-font: var(--wp--preset--font-family--bricolage-grotesque, "Bricolage Grotesque", sans-serif);
+  --we-black: #000000;
+  --we-lime: #c8ff9a;
+  --we-white: #ffffff;
+  --we-soft-white: #f5f5f0;
+  --we-gray: #9b9b9b;
+  --we-line: rgba(200, 255, 154, 0.22);
+
+  --az-section-max-width: 1380px;
+  --az-section-wide-width: 1735px;
+  --az-section-x-padding: clamp(24px, 7vw, 96px);
+  --az-section-y-padding: clamp(72px, 8vw, 150px);
+  --az-section-y-padding-mobile: clamp(54px, 13vw, 88px);
+  --az-section-gap: clamp(28px, 4vw, 72px);
+
+  --az-heading-font: var(--wp--preset--font-family--dm-sans, "DM Sans", sans-serif);
+  --az-body-font: var(--wp--preset--font-family--dm-sans, "DM Sans", sans-serif);
+  --az-heading-xl: clamp(46px, 6vw, 112px);
+  --az-heading-lg: clamp(38px, 4.4vw, 82px);
+  --az-heading-md: clamp(30px, 3vw, 54px);
+
+  --az-button-bg: var(--we-lime);
+  --az-button-color: var(--we-black);
+  --az-button-font: var(--az-body-font);
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--we-black);
+  color: var(--we-white);
+  font-family: var(--az-body-font);
+}
+
+img,
+svg,
+video,
+iframe {
+  max-width: 100%;
+}
+
+.az-section {
+  background: var(--az-section-bg, transparent);
+  color: var(--az-section-color, inherit);
+  margin: var(--az-section-margin-top, 0) 0 var(--az-section-margin-bottom, 0);
+  padding: var(--az-section-padding-top, var(--az-section-y-padding)) var(--az-section-x-padding) var(--az-section-padding-bottom, var(--az-section-y-padding));
+}
+
+.az-section__inner,
+.az-section-inner {
+  margin: 0 auto;
+  max-width: var(--az-section-content-width, var(--az-section-max-width));
+  width: 100%;
+}
+
+.az-section--full .az-section__inner,
+.az-section--full .az-section-inner {
+  max-width: none;
+}
+
+.az-section--boxed .az-section__inner,
+.az-section--boxed .az-section-inner {
+  max-width: var(--az-section-content-width, var(--az-section-max-width));
+}
+
+.az-section--wide .az-section__inner,
+.az-section--wide .az-section-inner {
+  max-width: var(--az-section-wide-width);
+}
+
+.az-title-heading,
+.az-section-heading {
+  color: inherit;
+  font-family: var(--az-heading-font);
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
 .az-title-heading {
-    font-family: var(--az-button-font);
-    font-size: clamp(40px, 4.85vw, 90px) !important;
-    font-weight: 800;
-    letter-spacing: 0;
-    line-height: 1.04;
+  font-size: var(--az-heading-xl) !important;
+  line-height: 0.98;
 }
 
 .az-section-heading {
-    font-family: var(--az-button-font);
-    font-size: var(--az-section-heading-size) !important;
-    font-weight: 800;
-    letter-spacing: 0;
-    line-height: 1.04;
+  font-size: var(--az-heading-lg) !important;
+  line-height: 1.02;
+}
+
+.az-section-subheading {
+  color: var(--az-section-subheading-color, var(--we-lime));
+  font-family: var(--az-body-font);
+  font-size: clamp(15px, 1.2vw, 20px);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.45;
 }
 
 .az-button {
-    align-items: center;
-    background: var(--az-button-bg, var(--home-age-guide-red, #ed302b)) !important;
-    border: 0;
-    border-radius: 999px;
-    color: var(--az-button-color, #fff) !important;
-    display: inline-flex;
-    font-family: var(--az-button-font);
-    font-weight: 700;
-    justify-content: center;
-    letter-spacing: 0;
-    line-height: 1;
-    text-align: center;
-    text-decoration: none;
-    text-transform: uppercase;
-    white-space: nowrap;
+  align-items: center;
+  background: var(--az-button-bg, var(--we-lime)) !important;
+  border: 0;
+  border-radius: 999px;
+  color: var(--az-button-color, var(--we-black)) !important;
+  display: inline-flex;
+  font-family: var(--az-button-font);
+  font-weight: 700;
+  justify-content: center;
+  letter-spacing: 0;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .az-button--small {
-    font-size: clamp(8px, 0.8rem, 14px) !important;
-    min-height: clamp(20px, 1.55vw, 40px) !important;
-    min-width: clamp(58px, 5vw, 108px) !important;
-    padding: 8px 16px !important;
+  font-size: clamp(12px, 0.85vw, 15px) !important;
+  min-height: 38px !important;
+  min-width: 104px !important;
+  padding: 10px 18px !important;
 }
 
 .az-button--medium {
-    font-size: clamp(12px, 1rem, 16px) !important;
-    min-height: clamp(40px, 2vw, 56px) !important;
-    min-width: clamp(148px, 12vw, 230px) !important;
-    padding: 12px 28px !important;
+  font-size: clamp(15px, 1vw, 18px) !important;
+  min-height: 50px !important;
+  min-width: 150px !important;
+  padding: 15px 28px !important;
 }
 
 .az-button--large {
-    font-size: clamp(18px, 1.2rem, 28px) !important;
-    min-height: clamp(50px, 2.5vw, 84px) !important;
-    min-width: clamp(260px, 24vw, 520px) !important;
-    padding: 18px 42px !important;
+  font-size: clamp(18px, 1.3vw, 24px) !important;
+  min-height: 64px !important;
+  min-width: 220px !important;
+  padding: 20px 42px !important;
+}
+
+.az-button--ghost {
+  background: transparent !important;
+  border: 1px solid currentColor;
+  color: var(--az-button-ghost-color, var(--we-lime)) !important;
 }
 
 a.added_to_cart {
-    margin-top: 0 !important;
-    font-size: 14px;
-    font-weight: 700;
-    text-decoration: underline;
+  color: currentColor;
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 0 !important;
+  text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --az-section-x-padding: clamp(22px, 5vw, 48px);
+  }
+}
+
+@media (max-width: 767px) {
+  .az-section {
+    padding-top: var(--az-section-padding-top, var(--az-section-y-padding-mobile));
+    padding-bottom: var(--az-section-padding-bottom, var(--az-section-y-padding-mobile));
+  }
+
+  .az-button {
+    white-space: normal;
+  }
 }
 
 .checkout {
-    .woocommerce {
-        max-width: 1280px !important;
+  .woocommerce {
+    max-width: 1280px !important;
+  }
+
+  .woocommerce-billing-fields {
+    label {
+      font-size: 16px;
+      font-weight: 800;
     }
-    .woocommerce-billing-fields {
-        label {
-            font-size: 16px;
-            font-weight: 800;
-        }
-        select {
-            min-height: 40px;
-            padding: .9rem 1.1rem;
-        }
+
+    select {
+      min-height: 40px;
+      padding: 0.9rem 1.1rem;
     }
-    .woocommerce-page table.shop_table {
-        width: 100%;
-    }
+  }
+
+  .woocommerce-page table.shop_table {
+    width: 100%;
+  }
 }

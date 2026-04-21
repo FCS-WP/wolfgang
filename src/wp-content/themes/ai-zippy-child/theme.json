@@ -6,49 +6,49 @@
 		"color": {
 			"palette": [
 				{
-					"slug": "lollipop-red",
-					"color": "#FF6B6B",
-					"name": "Lollipop Red - Primary Hero"
+					"slug": "wolfgang-black",
+					"color": "#000000",
+					"name": "Wolfgang Black"
 				},
 				{
-					"slug": "sunshine",
-					"color": "#FFE66D",
-					"name": "Sunshine - Accent / CTA"
+					"slug": "wolfgang-lime",
+					"color": "#C8FF9A",
+					"name": "Wolfgang Lime"
 				},
 				{
-					"slug": "spearmint",
-					"color": "#45B69C",
-					"name": "Spearmint - Secondary Accent"
+					"slug": "wolfgang-white",
+					"color": "#FFFFFF",
+					"name": "Wolfgang White"
 				},
 				{
-					"slug": "deep-ink",
-					"color": "#2C3E7A",
-					"name": "Deep Ink - Text / Nav"
+					"slug": "soft-white",
+					"color": "#F5F5F0",
+					"name": "Soft White"
 				},
 				{
-					"slug": "warm-cream",
-					"color": "#FFFBF4",
-					"name": "Warm Cream - Page Background"
+					"slug": "graphite",
+					"color": "#171717",
+					"name": "Graphite"
 				},
 				{
-					"slug": "peach-pop",
-					"color": "#FF8C69",
-					"name": "Peach Pop - Tertiary / Tags"
+					"slug": "muted-gray",
+					"color": "#9B9B9B",
+					"name": "Muted Gray"
 				},
 				{
-					"slug": "text-muted",
-					"color": "#6F6F77",
-					"name": "Text Muted"
+					"slug": "lime-line",
+					"color": "#314326",
+					"name": "Lime Line"
 				},
 				{
 					"slug": "border",
-					"color": "#E7E1D8",
+					"color": "#2A2A2A",
 					"name": "Border"
 				},
 				{
-					"slug": "white",
-					"color": "#FFFFFF",
-					"name": "White"
+					"slug": "transparent",
+					"color": "transparent",
+					"name": "Transparent"
 				}
 			]
 		},
@@ -153,11 +153,11 @@
 	},
 	"styles": {
 		"color": {
-			"background": "var(--wp--preset--color--warm-cream)",
-			"text": "var(--wp--preset--color--deep-ink)"
+			"background": "var(--wp--preset--color--wolfgang-black)",
+			"text": "var(--wp--preset--color--wolfgang-white)"
 		},
 		"typography": {
-			"fontFamily": "var(--wp--preset--font-family--bricolage-grotesque)",
+			"fontFamily": "var(--wp--preset--font-family--dm-sans)",
 			"fontSize": "var(--wp--preset--font-size--medium)",
 			"lineHeight": "1.6"
 		},
