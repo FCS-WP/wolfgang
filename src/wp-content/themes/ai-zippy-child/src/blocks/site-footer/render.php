@@ -4,6 +4,8 @@ defined('ABSPATH') || exit;
 $attrs = wp_parse_args($attributes ?? [], [
     'logoUrl' => '',
     'logoAlt' => '',
+    'logoWidth' => 190,
+    'logoHeight' => 54,
     'description' => 'Wolfgang Ethos is a local AI-driven creative agency that provides an all-in-one solution for SMEs.',
     'menuId' => 0,
     'fallbackLinks' => [
@@ -23,6 +25,9 @@ if (!empty($attrs['menuId'])) {
     $menu_items = is_array($items) ? array_filter($items, static fn($item) => (int) $item->menu_item_parent === 0) : [];
 }
 $fallback_links = is_array($attrs['fallbackLinks']) ? $attrs['fallbackLinks'] : [];
+$logo_width = max(1, absint($attrs['logoWidth']));
+$logo_height = max(1, absint($attrs['logoHeight']));
+$logo_style = sprintf('--site-footer-logo-width:%1$dpx;--site-footer-logo-height:%2$dpx;', $logo_width, $logo_height);
 
 $copyright = trim((string) $attrs['copyright']);
 if ($copyright === '') {
@@ -36,7 +41,7 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'site-footer']);
         <div class="site-footer__brand">
             <a href="<?php echo esc_url(home_url('/')); ?>">
                 <?php if (!empty($attrs['logoUrl'])) : ?>
-                    <img src="<?php echo esc_url($attrs['logoUrl']); ?>" alt="<?php echo esc_attr($attrs['logoAlt'] ?: get_bloginfo('name')); ?>">
+                    <img src="<?php echo esc_url($attrs['logoUrl']); ?>" alt="<?php echo esc_attr($attrs['logoAlt'] ?: get_bloginfo('name')); ?>" style="<?php echo esc_attr($logo_style); ?>">
                 <?php else : ?>
                     <span class="site-footer__logo-text" aria-label="<?php echo esc_attr(get_bloginfo('name')); ?>">
                         <span><?php esc_html_e('Wolfgang', 'ai-zippy-child'); ?></span>

@@ -1,0 +1,18 @@
+.service-overview-editor__card {
+	border-top: 1px solid #ddd;
+	margin-top: 14px;
+	padding-top: 14px;
+}
+
+.service-overview-editor__icon-media {
+	display: grid;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.service-overview-editor__icon-media img {
+	display: block;
+	height: 54px;
+	object-fit: contain;
+	width: 54px;
+}

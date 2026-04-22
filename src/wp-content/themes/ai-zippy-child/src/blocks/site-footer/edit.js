@@ -1,5 +1,5 @@
 import { InspectorControls, MediaUpload, MediaUploadCheck, RichText, URLInputButton, useBlockProps } from "@wordpress/block-editor";
-import { Button, PanelBody, SelectControl, TextControl } from "@wordpress/components";
+import { Button, PanelBody, RangeControl, SelectControl, TextControl } from "@wordpress/components";
 import { useEffect, useState } from "@wordpress/element";
 import apiFetch from "@wordpress/api-fetch";
 
@@ -8,6 +8,10 @@ const asItems = (items) => (Array.isArray(items) ? items : []);
 export default function Edit({ attributes, setAttributes }) {
 	const [menus, setMenus] = useState([]);
 	const fallbackLinks = asItems(attributes.fallbackLinks);
+	const logoStyle = {
+		"--site-footer-logo-width": `${attributes.logoWidth || 190}px`,
+		"--site-footer-logo-height": `${attributes.logoHeight || 54}px`,
+	};
 	const blockProps = useBlockProps({ className: "site-footer" });
 
 	useEffect(() => {
@@ -44,6 +48,20 @@ export default function Edit({ attributes, setAttributes }) {
 							)}
 						/>
 					</MediaUploadCheck>
+					<RangeControl
+						label="Logo width"
+						value={attributes.logoWidth}
+						min={60}
+						max={420}
+						onChange={(logoWidth) => setAttributes({ logoWidth })}
+					/>
+					<RangeControl
+						label="Logo height"
+						value={attributes.logoHeight}
+						min={24}
+						max={220}
+						onChange={(logoHeight) => setAttributes({ logoHeight })}
+					/>
 					<SelectControl label="Menu" value={attributes.menuId} options={menuOptions} onChange={(menuId) => setAttributes({ menuId: Number(menuId) })} />
 				</PanelBody>
 				<PanelBody title="Fallback Links" initialOpen={false}>
@@ -59,7 +77,7 @@ export default function Edit({ attributes, setAttributes }) {
 			<footer {...blockProps}>
 				<div className="site-footer__inner">
 					<div className="site-footer__brand">
-						{attributes.logoUrl ? <img src={attributes.logoUrl} alt="" /> : (
+						{attributes.logoUrl ? <img src={attributes.logoUrl} alt="" style={logoStyle} /> : (
 							<span className="site-footer__logo-text">
 								<span>Wolfgang</span>
 								<strong>Methos</strong>

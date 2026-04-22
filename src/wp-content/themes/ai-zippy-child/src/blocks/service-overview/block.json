@@ -1,0 +1,78 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ai-zippy-child/service-overview",
+	"version": "1.0.0",
+	"title": "Service Overview",
+	"category": "ai-zippy-page",
+	"icon": "grid-view",
+	"description": "Service page intro with editable service cards.",
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"attributes": {
+		"align": { "type": "string", "default": "full" },
+		"layout": { "type": "string", "default": "boxed" },
+		"backgroundColor": { "type": "string", "default": "#000000" },
+		"textColor": { "type": "string", "default": "#c8ff9a" },
+		"paddingTop": { "type": "number", "default": 120 },
+		"paddingRight": { "type": "number", "default": 0 },
+		"paddingBottom": { "type": "number", "default": 96 },
+		"paddingLeft": { "type": "number", "default": 0 },
+		"marginTop": { "type": "number", "default": 0 },
+		"marginBottom": { "type": "number", "default": 0 },
+		"paddingTopTablet": { "type": "number" },
+		"paddingRightTablet": { "type": "number" },
+		"paddingBottomTablet": { "type": "number" },
+		"paddingLeftTablet": { "type": "number" },
+		"marginTopTablet": { "type": "number" },
+		"marginBottomTablet": { "type": "number" },
+		"paddingTopMobile": { "type": "number" },
+		"paddingRightMobile": { "type": "number" },
+		"paddingBottomMobile": { "type": "number" },
+		"paddingLeftMobile": { "type": "number" },
+		"marginTopMobile": { "type": "number" },
+		"marginBottomMobile": { "type": "number" },
+		"intro": {
+			"type": "string",
+			"default": "Effective marketing more than just grabbing attention. It's about building meaningful connections. By combining strategy, creativity, and data, we craft campaigns that resonate and deliver measurable results."
+		},
+		"cards": {
+			"type": "array",
+			"default": [
+				{
+					"icon": "megaphone",
+					"iconImageId": 0,
+					"iconImageUrl": "",
+					"iconImageAlt": "",
+					"title": "Digital Marketing",
+					"items": ["Social Media Marketing", "Performance Marketing", "Influencer Marketing", "Content Marketing", "Amplification Posts"]
+				},
+				{
+					"icon": "globe",
+					"iconImageId": 0,
+					"iconImageUrl": "",
+					"iconImageAlt": "",
+					"title": "Website",
+					"items": ["E-commerce", "SEO Optimization", "Functionality & Integration (Booking system, Calendars)"]
+				},
+				{
+					"icon": "bulb",
+					"iconImageId": 0,
+					"iconImageUrl": "",
+					"iconImageAlt": "",
+					"title": "Creative Services",
+					"items": ["Logo Design", "Print Design", "Digital Design", "EDM", "Generative AI"]
+				}
+			]
+		},
+		"cardRadius": { "type": "number", "default": 8 },
+		"cardGap": { "type": "number", "default": 28 }
+	},
+	"textdomain": "ai-zippy-child",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

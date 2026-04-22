@@ -16,6 +16,8 @@
 		"logoId": { "type": "number", "default": 0 },
 		"logoUrl": { "type": "string", "default": "" },
 		"logoAlt": { "type": "string", "default": "" },
+		"logoWidth": { "type": "number", "default": 190 },
+		"logoHeight": { "type": "number", "default": 52 },
 		"menuId": { "type": "number", "default": 0 },
 		"fallbackLinks": {
 			"type": "array",
@@ -27,10 +29,17 @@
 			]
 		},
 		"ctaText": { "type": "string", "default": "Contact us" },
-		"ctaUrl": { "type": "string", "default": "/contact-us" }
+		"ctaUrl": { "type": "string", "default": "/contact-us" },
+		"paddingTop": { "type": "number", "default": 26 },
+		"paddingRight": { "type": "number" },
+		"paddingBottom": { "type": "number", "default": 26 },
+		"paddingLeft": { "type": "number" },
+		"marginTop": { "type": "number", "default": 0 },
+		"marginBottom": { "type": "number", "default": 0 }
 	},
 	"textdomain": "ai-zippy-child",
 	"editorScript": "file:./index.js",
+	"viewScript": "file:./view.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
 	"render": "file:./render.php"

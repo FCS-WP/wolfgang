@@ -1,0 +1,21 @@
+.home-services-editor__media {
+	display: grid;
+	gap: 10px;
+
+	img,
+	div:first-child {
+		aspect-ratio: 1 / 1.2;
+		background: #111;
+		color: #fff;
+		display: grid;
+		object-fit: cover;
+		place-items: center;
+		width: 100%;
+	}
+}
+
+.home-services-editor__item {
+	border-top: 1px solid #ddd;
+	margin-top: 14px;
+	padding-top: 14px;
+}

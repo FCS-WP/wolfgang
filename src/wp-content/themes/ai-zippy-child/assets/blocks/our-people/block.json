@@ -1,0 +1,185 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ai-zippy-child/our-people",
+  "version": "1.0.0",
+  "title": "Our People",
+  "category": "ai-zippy-page",
+  "icon": "groups",
+  "description": "Editable team grid for the Our People section.",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "layout": {
+      "type": "string",
+      "default": "boxed"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "paddingTop": {
+      "type": "number",
+      "default": 70
+    },
+    "paddingRight": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingBottom": {
+      "type": "number",
+      "default": 80
+    },
+    "paddingLeft": {
+      "type": "number",
+      "default": 0
+    },
+    "marginTop": {
+      "type": "number",
+      "default": 0
+    },
+    "marginBottom": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingTopTablet": {
+      "type": "number"
+    },
+    "paddingRightTablet": {
+      "type": "number"
+    },
+    "paddingBottomTablet": {
+      "type": "number"
+    },
+    "paddingLeftTablet": {
+      "type": "number"
+    },
+    "marginTopTablet": {
+      "type": "number"
+    },
+    "marginBottomTablet": {
+      "type": "number"
+    },
+    "paddingTopMobile": {
+      "type": "number"
+    },
+    "paddingRightMobile": {
+      "type": "number"
+    },
+    "paddingBottomMobile": {
+      "type": "number"
+    },
+    "paddingLeftMobile": {
+      "type": "number"
+    },
+    "marginTopMobile": {
+      "type": "number"
+    },
+    "marginBottomMobile": {
+      "type": "number"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Our People"
+    },
+    "ctaText": {
+      "type": "string",
+      "default": "Want to meet us in person?\nDrop by and say hello."
+    },
+    "accentStartColor": {
+      "type": "string",
+      "default": "#0167ff"
+    },
+    "accentEndColor": {
+      "type": "string",
+      "default": "#c5fda2"
+    },
+    "columns": {
+      "type": "number",
+      "default": 4
+    },
+    "people": {
+      "type": "array",
+      "default": [
+        {
+          "imageUrl": "https://static.wixstatic.com/media/46cce8_d20491567e4c4e3c99f403a02170304c~mv2.png/v1/crop/x_708,y_0,w_784,h_1280/fill/w_245,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/KM.png",
+          "imageAlt": "Kah Min",
+          "name": "Kah Min",
+          "role": "Head of Agency"
+        },
+        {
+          "imageUrl": "https://static.wixstatic.com/media/46cce8_c5cda05cb4de4548a5dd8c4a41828f9f~mv2.png/v1/crop/x_678,y_0,w_701,h_1145/fill/w_245,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kelvin.png",
+          "imageAlt": "Kelvin",
+          "name": "Kelvin",
+          "role": "Content & Admin"
+        },
+        {
+          "imageUrl": "https://static.wixstatic.com/media/46cce8_d8c832c2012143df9b49edcf14c11890~mv2.png/v1/fill/w_244,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kylie.png",
+          "imageAlt": "Kylie",
+          "name": "Kylie",
+          "role": "Creative Specialist"
+        },
+        {
+          "imageUrl": "https://static.wixstatic.com/media/46cce8_ca76612883b64336b4a2477e0360fef1~mv2.png/v1/fill/w_244,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Kha_Name%20Card%20Banner_Close%20Up.png",
+          "imageAlt": "Kha",
+          "name": "Kha",
+          "role": "Creative Specialist"
+        },
+        {
+          "imageUrl": "https://static.wixstatic.com/media/46cce8_5c09c8d5ee404d788d97de3d8c7e4cac~mv2.png/v1/crop/x_586,y_0,w_627,h_1024/fill/w_245,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Joey%201.png",
+          "imageAlt": "Joey",
+          "name": "Joey",
+          "role": "Account Team Lead"
+        },
+        {
+          "imageUrl": "https://static.wixstatic.com/media/46cce8_d347d09f2b6f4765a6977efcbefc2b8d~mv2.png/v1/crop/x_468,y_0,w_764,h_1248/fill/w_245,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_o5hb00o5hb00o5hb.png",
+          "imageAlt": "Jun Long",
+          "name": "Jun Long",
+          "role": "Senior Consultant"
+        },
+        {
+          "imageUrl": "https://static.wixstatic.com/media/46cce8_9538443965e044cea8391ab36fc47613~mv2.png/v1/crop/x_591,y_224,w_519,h_850/fill/w_244,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/mae_cover.png",
+          "imageAlt": "Jerymae",
+          "name": "Jerymae",
+          "role": "Consultant"
+        },
+        {
+          "imageUrl": "https://static.wixstatic.com/media/46cce8_1f6624eaa18f46d19e0a3e5de7242372~mv2.png/v1/crop/x_472,y_328,w_405,h_666/fill/w_244,h_400,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/Gemini_Generated_Image_9unc6t9unc6t9unc%20(1).png",
+          "imageAlt": "Tee Hou",
+          "name": "Tee Hou",
+          "role": "Consultant"
+        },
+        {
+          "imageUrl": "https://static.wixstatic.com/media/46cce8_2951c3f0c78a482d85b4dc77ade99cd2~mv2.jpg/v1/crop/x_360,y_0,w_1011,h_1651/fill/w_245,h_400,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/photo_6136240147281331494_y%20copy.jpg",
+          "imageAlt": "Gwee",
+          "name": "Gwee",
+          "role": "Production Lead"
+        },
+        {
+          "imageUrl": "",
+          "imageAlt": "Matthew",
+          "name": "Matthew",
+          "role": "Production Executive"
+        }
+      ]
+    }
+  },
+  "textdomain": "ai-zippy-child",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

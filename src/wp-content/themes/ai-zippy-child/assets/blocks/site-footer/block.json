@@ -30,6 +30,14 @@
       "type": "string",
       "default": ""
     },
+    "logoWidth": {
+      "type": "number",
+      "default": 190
+    },
+    "logoHeight": {
+      "type": "number",
+      "default": 54
+    },
     "description": {
       "type": "string",
       "default": "Wolfgang Ethos is a local AI-driven creative agency that provides an all-in-one solution for SMEs."

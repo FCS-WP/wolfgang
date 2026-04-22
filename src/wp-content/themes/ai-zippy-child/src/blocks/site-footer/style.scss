@@ -2,16 +2,20 @@
   --site-footer-font: var(--wp--preset--font-family--dm-sans, "DM Sans", sans-serif);
   --site-footer-lime: #c8ff9a;
   background: #000;
+  box-sizing: border-box;
   color: #fff;
   font-family: var(--site-footer-font);
   padding: clamp(90px, 8vw, 150px) var(--az-section-x-padding, clamp(24px, 7vw, 96px)) clamp(86px, 8vw, 140px);
+  width: 100%;
 
   .site-footer__inner {
+    box-sizing: border-box;
     display: grid;
     gap: clamp(48px, 7vw, 140px);
     grid-template-columns: minmax(300px, 1.2fr) minmax(150px, 0.36fr) minmax(260px, 0.72fr);
     margin: 0 auto;
-    max-width: 1380px;
+    max-width: var(--az-section-max-width, 1180px);
+    width: 100%;
   }
 
   .site-footer__brand a {
@@ -23,9 +27,9 @@
 
   .site-footer__brand img {
     display: block;
-    height: auto;
-    max-height: 54px;
-    max-width: 190px;
+    height: var(--site-footer-logo-height, auto);
+    max-width: min(100%, var(--site-footer-logo-width, 190px));
+    width: var(--site-footer-logo-width, 190px);
     object-fit: contain;
   }
 
@@ -55,31 +59,31 @@
   .site-footer__description {
     color: var(--site-footer-lime);
     font-size: clamp(28px, 2.05vw, 42px);
-    font-weight: 800;
+    font-weight: 600;
     letter-spacing: 0;
     line-height: 1.18;
-    margin: clamp(28px, 3vw, 54px) 0 0;
+    margin-top: 20px;
     max-width: 560px;
   }
 
   .site-footer__nav {
-    display: grid;
-    gap: 28px;
-    justify-content: start;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
   }
 
   .site-footer__nav a {
     color: #fff;
-    font-size: clamp(16px, 1vw, 20px);
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: 500;
     line-height: 1.1;
     text-decoration: none;
   }
 
   .site-footer__contact {
     color: #fff;
-    font-size: clamp(16px, 1vw, 20px);
-    font-weight: 700;
+    font-size: 1rem;
+    font-weight: 500;
     line-height: 1.45;
   }
 

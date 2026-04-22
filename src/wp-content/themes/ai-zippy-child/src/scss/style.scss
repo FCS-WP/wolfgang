@@ -1,6 +1,7 @@
 // Child global styles.
 @use 'form';
 @use 'socials';
+@use 'customize';
 
 :root {
   --we-black: #000000;
@@ -10,14 +11,18 @@
   --we-gray: #9b9b9b;
   --we-line: rgba(200, 255, 154, 0.22);
 
-  --az-section-max-width: 1380px;
+  --az-section-max-width: 1180px;
   --az-section-wide-width: 1735px;
   --az-section-x-padding: clamp(24px, 7vw, 96px);
+  --az-section-tablet-x-padding: 40px;
+  --az-section-mobile-x-padding: 20px;
   --az-section-y-padding: clamp(72px, 8vw, 150px);
+  --az-section-tablet-y-padding: 70px;
+  --az-section-mobile-y-padding: 50px;
   --az-section-y-padding-mobile: clamp(54px, 13vw, 88px);
   --az-section-gap: clamp(28px, 4vw, 72px);
 
-  --az-heading-font: var(--wp--preset--font-family--dm-sans, "DM Sans", sans-serif);
+  --az-heading-font: var(--wp--preset--font-family--poppins, "Poppins", sans-serif);
   --az-body-font: var(--wp--preset--font-family--dm-sans, "DM Sans", sans-serif);
   --az-heading-xl: clamp(46px, 6vw, 112px);
   --az-heading-lg: clamp(38px, 4.4vw, 82px);
@@ -26,6 +31,18 @@
   --az-button-bg: var(--we-lime);
   --az-button-color: var(--we-black);
   --az-button-font: var(--az-body-font);
+  --az-button-primary-bg: var(--we-lime);
+  --az-button-primary-color: var(--we-black);
+  --az-button-secondary-bg: var(--we-white);
+  --az-button-secondary-color: var(--we-black);
+  --az-button-success-bg: #35d36b;
+  --az-button-success-color: var(--we-black);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html {
@@ -36,6 +53,8 @@ body {
   background: var(--we-black);
   color: var(--we-white);
   font-family: var(--az-body-font);
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 img,
@@ -47,13 +66,16 @@ iframe {
 
 .az-section {
   background: var(--az-section-bg, transparent);
+  box-sizing: border-box;
   color: var(--az-section-color, inherit);
   margin: var(--az-section-margin-top, 0) 0 var(--az-section-margin-bottom, 0);
-  padding: var(--az-section-padding-top, var(--az-section-y-padding)) var(--az-section-x-padding) var(--az-section-padding-bottom, var(--az-section-y-padding));
+  padding: var(--az-section-padding-top, var(--az-section-y-padding)) var(--az-section-padding-right, var(--az-section-x-padding)) var(--az-section-padding-bottom, var(--az-section-y-padding)) var(--az-section-padding-left, var(--az-section-x-padding));
+  width: 100%;
 }
 
 .az-section__inner,
 .az-section-inner {
+  box-sizing: border-box;
   margin: 0 auto;
   max-width: var(--az-section-content-width, var(--az-section-max-width));
   width: 100%;
@@ -95,7 +117,7 @@ iframe {
 .az-section-subheading {
   color: var(--az-section-subheading-color, var(--we-lime));
   font-family: var(--az-body-font);
-  font-size: clamp(15px, 1.2vw, 20px);
+  font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.45;
@@ -104,45 +126,96 @@ iframe {
 .az-button {
   align-items: center;
   background: var(--az-button-bg, var(--we-lime)) !important;
-  border: 0;
+  border: 1px solid var(--az-button-border-color, var(--az-button-bg, var(--we-lime)));
   border-radius: 999px;
   color: var(--az-button-color, var(--we-black)) !important;
+  cursor: pointer;
   display: inline-flex;
   font-family: var(--az-button-font);
-  font-weight: 700;
+  font-weight: 500;
   justify-content: center;
   letter-spacing: 0;
   line-height: 1;
   text-align: center;
   text-decoration: none;
+  transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, color 180ms ease, transform 180ms ease;
   white-space: nowrap;
 }
 
+.az-button:hover,
+.az-button:focus-visible {
+  box-shadow: 0 10px 24px rgba(200, 255, 154, 0.22);
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.az-button:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
 .az-button--small {
-  font-size: clamp(12px, 0.85vw, 15px) !important;
+  font-size: clamp(10px, 0.85vw, 12px) !important;
   min-height: 38px !important;
   min-width: 104px !important;
   padding: 10px 18px !important;
 }
 
 .az-button--medium {
-  font-size: clamp(15px, 1vw, 18px) !important;
+  font-size: 14px !important;
   min-height: 50px !important;
   min-width: 150px !important;
   padding: 15px 28px !important;
 }
 
 .az-button--large {
-  font-size: clamp(18px, 1.3vw, 24px) !important;
+  font-size: 1rem !important;
   min-height: 64px !important;
   min-width: 220px !important;
   padding: 20px 42px !important;
 }
 
+.az-button--contained,
+.az-button--contain {
+  background: var(--az-button-bg, var(--we-lime)) !important;
+  border-color: var(--az-button-border-color, var(--az-button-bg, var(--we-lime)));
+  color: var(--az-button-color, var(--we-black)) !important;
+}
+
+.az-button--outlined,
 .az-button--ghost {
   background: transparent !important;
-  border: 1px solid currentColor;
-  color: var(--az-button-ghost-color, var(--we-lime)) !important;
+  border-color: var(--az-button-border-color, var(--az-button-bg, currentColor));
+  color: var(--az-button-color, var(--az-button-ghost-color, var(--we-lime))) !important;
+}
+
+.az-button--outlined:hover,
+.az-button--outlined:focus-visible,
+.az-button--ghost:hover,
+.az-button--ghost:focus-visible {
+  background: var(--az-button-bg, var(--we-lime)) !important;
+  color: var(--az-button-hover-color, var(--we-black)) !important;
+}
+
+.az-button--primary {
+  --az-button-bg: var(--az-button-primary-bg);
+  --az-button-border-color: var(--az-button-primary-bg);
+  --az-button-color: var(--az-button-primary-color);
+  --az-button-hover-color: var(--az-button-primary-color);
+}
+
+.az-button--secondary {
+  --az-button-bg: var(--az-button-secondary-bg);
+  --az-button-border-color: var(--az-button-secondary-bg);
+  --az-button-color: var(--az-button-secondary-color);
+  --az-button-hover-color: var(--az-button-secondary-color);
+}
+
+.az-button--success {
+  --az-button-bg: var(--az-button-success-bg);
+  --az-button-border-color: var(--az-button-success-bg);
+  --az-button-color: var(--az-button-success-color);
+  --az-button-hover-color: var(--az-button-success-color);
 }
 
 a.added_to_cart {
@@ -157,12 +230,19 @@ a.added_to_cart {
   :root {
     --az-section-x-padding: clamp(22px, 5vw, 48px);
   }
+
+  .az-section {
+    margin-top: var(--az-section-margin-top-tablet, var(--az-section-margin-top, 0));
+    margin-bottom: var(--az-section-margin-bottom-tablet, var(--az-section-margin-bottom, 0));
+    padding: var(--az-section-padding-top-tablet, var(--az-section-tablet-y-padding)) var(--az-section-padding-right-tablet, var(--az-section-tablet-x-padding)) var(--az-section-padding-bottom-tablet, var(--az-section-tablet-y-padding)) var(--az-section-padding-left-tablet, var(--az-section-tablet-x-padding));
+  }
 }
 
 @media (max-width: 767px) {
   .az-section {
-    padding-top: var(--az-section-padding-top, var(--az-section-y-padding-mobile));
-    padding-bottom: var(--az-section-padding-bottom, var(--az-section-y-padding-mobile));
+    margin-top: var(--az-section-margin-top-mobile, var(--az-section-margin-top-tablet, var(--az-section-margin-top, 0)));
+    margin-bottom: var(--az-section-margin-bottom-mobile, var(--az-section-margin-bottom-tablet, var(--az-section-margin-bottom, 0)));
+    padding: var(--az-section-padding-top-mobile, var(--az-section-mobile-y-padding)) var(--az-section-padding-right-mobile, var(--az-section-padding-right-tablet, var(--az-section-mobile-x-padding))) var(--az-section-padding-bottom-mobile, var(--az-section-mobile-y-padding)) var(--az-section-padding-left-mobile, var(--az-section-padding-left-tablet, var(--az-section-mobile-x-padding)));
   }
 
   .az-button {

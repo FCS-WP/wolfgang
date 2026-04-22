@@ -93,16 +93,40 @@
 					]
 				},
 				{
-					"fontFamily": "\"Syne\", sans-serif",
-					"slug": "syne",
-					"name": "Syne",
+					"fontFamily": "\"Poppins\", sans-serif",
+					"slug": "poppins",
+					"name": "Poppins",
 					"fontFace": [
 						{
-							"fontFamily": "Syne",
+							"fontFamily": "Poppins",
 							"fontStyle": "normal",
-							"fontWeight": "700 800",
+							"fontWeight": "400",
 							"src": [
-								"file:./src/fonts/syne.ttf"
+								"file:./src/fonts/poppins-regular.ttf"
+							]
+						},
+						{
+							"fontFamily": "Poppins",
+							"fontStyle": "normal",
+							"fontWeight": "600",
+							"src": [
+								"file:./src/fonts/poppins-600.ttf"
+							]
+						},
+						{
+							"fontFamily": "Poppins",
+							"fontStyle": "normal",
+							"fontWeight": "700",
+							"src": [
+								"file:./src/fonts/poppins-700.ttf"
+							]
+						},
+						{
+							"fontFamily": "Poppins",
+							"fontStyle": "normal",
+							"fontWeight": "800",
+							"src": [
+								"file:./src/fonts/poppins-800.ttf"
 							]
 						}
 					]
@@ -147,7 +171,7 @@
 			]
 		},
 		"layout": {
-			"contentSize": "1200px",
+			"contentSize": "1180px",
 			"wideSize": "1735px"
 		}
 	},
@@ -164,49 +188,49 @@
 		"elements": {
 			"heading": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--syne)",
+					"fontFamily": "var(--wp--preset--font-family--poppins)",
 					"fontWeight": "800",
 					"lineHeight": "1.05"
 				}
 			},
 			"h1": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--syne)",
+					"fontFamily": "var(--wp--preset--font-family--poppins)",
 					"fontWeight": "800",
 					"lineHeight": "1"
 				}
 			},
 			"h2": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--syne)",
+					"fontFamily": "var(--wp--preset--font-family--poppins)",
 					"fontWeight": "800",
 					"lineHeight": "1.05"
 				}
 			},
 			"h3": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--syne)",
+					"fontFamily": "var(--wp--preset--font-family--poppins)",
 					"fontWeight": "700",
 					"lineHeight": "1.12"
 				}
 			},
 			"h4": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--syne)",
+					"fontFamily": "var(--wp--preset--font-family--poppins)",
 					"fontWeight": "700",
 					"lineHeight": "1.18"
 				}
 			},
 			"h5": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--syne)",
+					"fontFamily": "var(--wp--preset--font-family--poppins)",
 					"fontWeight": "700",
 					"lineHeight": "1.2"
 				}
 			},
 			"h6": {
 				"typography": {
-					"fontFamily": "var(--wp--preset--font-family--syne)",
+					"fontFamily": "var(--wp--preset--font-family--poppins)",
 					"fontWeight": "700",
 					"lineHeight": "1.2"
 				}

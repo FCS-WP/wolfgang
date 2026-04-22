@@ -1,0 +1,78 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ai-zippy-child/why-choose-us",
+	"version": "1.0.0",
+	"title": "Why Choose Us",
+	"category": "ai-zippy-page",
+	"icon": "star-filled",
+	"description": "Editable feature columns explaining why customers should choose the brand.",
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"attributes": {
+		"align": { "type": "string", "default": "full" },
+		"layout": { "type": "string", "default": "boxed" },
+		"backgroundColor": { "type": "string", "default": "#000000" },
+		"textColor": { "type": "string", "default": "#ffffff" },
+		"paddingTop": { "type": "number", "default": 116 },
+		"paddingRight": { "type": "number", "default": 0 },
+		"paddingBottom": { "type": "number", "default": 130 },
+		"paddingLeft": { "type": "number", "default": 0 },
+		"marginTop": { "type": "number", "default": 0 },
+		"marginBottom": { "type": "number", "default": 0 },
+		"paddingTopTablet": { "type": "number" },
+		"paddingRightTablet": { "type": "number" },
+		"paddingBottomTablet": { "type": "number" },
+		"paddingLeftTablet": { "type": "number" },
+		"marginTopTablet": { "type": "number" },
+		"marginBottomTablet": { "type": "number" },
+		"paddingTopMobile": { "type": "number" },
+		"paddingRightMobile": { "type": "number" },
+		"paddingBottomMobile": { "type": "number" },
+		"paddingLeftMobile": { "type": "number" },
+		"marginTopMobile": { "type": "number" },
+		"marginBottomMobile": { "type": "number" },
+		"heading": { "type": "string", "default": "Why Choose Us" },
+		"headingStartColor": { "type": "string", "default": "#1688ff" },
+		"headingEndColor": { "type": "string", "default": "#c8ff9a" },
+		"iconColor": { "type": "string", "default": "#c8ff9a" },
+		"columns": { "type": "number", "default": 3 },
+		"gap": { "type": "number", "default": 120 },
+		"items": {
+			"type": "array",
+			"default": [
+				{
+					"icon": "solution",
+					"iconId": 0,
+					"iconUrl": "",
+					"iconAlt": "",
+					"title": "All in one solution",
+					"description": "As part of an all-in-one SME solution, we deliver marketing services seamlessly integrated with EPOS POS and rewards programs. This connects every campaign across your ecosystem, helping you engage customers, track results in real time, and drive loyalty from one unified platform."
+				},
+				{
+					"icon": "ai",
+					"iconId": 0,
+					"iconUrl": "",
+					"iconAlt": "",
+					"title": "AI driven",
+					"description": "We leverage AI-driven processes to streamline every stage of your marketing projects. From content creation and campaign optimisation to performance tracking, AI helps us work more efficiently to deliver faster turnaround times, so your business sees results sooner without compromising quality."
+				},
+				{
+					"icon": "local",
+					"iconId": 0,
+					"iconUrl": "",
+					"iconAlt": "",
+					"title": "We are local",
+					"description": "We are a team with a deep understanding of the local trends, behaviours, and nuances to create more relevant and relatable campaigns. This ensures your brand communicates authentically while connecting more effectively with your target market."
+				}
+			]
+		}
+	},
+	"textdomain": "ai-zippy-child",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

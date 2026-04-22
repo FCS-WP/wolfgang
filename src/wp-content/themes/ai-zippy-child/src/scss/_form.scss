@@ -91,6 +91,21 @@ $fs-color-success: #45b69c;
     textarea { resize: vertical; min-height: 140px; }
 }
 
+.zippy-cf-field,
+.zippy-form__field {
+    .iti {
+        width: 100%;
+    }
+
+    .iti__tel-input {
+        width: 100%;
+    }
+
+    .iti__selected-country {
+        border-radius: 20px 0 0 20px;
+    }
+}
+
 // ── Labels ──
 .zippy-cf-required {
     color: #e53935;
@@ -163,8 +178,9 @@ $fs-color-success: #45b69c;
 .zippy-form__fields {
     display: flex;
     flex-wrap: wrap;
-    row-gap: 10px;
+    row-gap: 30px;
     column-gap: 20px;
+    max-width: 900px;
 }
 
 .zippy-form__field {
@@ -181,6 +197,15 @@ $fs-color-success: #45b69c;
     select {
         width: 100%;
         box-sizing: border-box;
+        background-color: var(--az-section-bg);
+        color: white;
+        outline: none;
+        min-height: 40px;
+        border: 0;
+        border-bottom: 1px solid#35d36b;
+    }
+    .iti {
+        width: 100%;
     }
 
     @media (max-width: 549px) {
@@ -191,7 +216,7 @@ $fs-color-success: #45b69c;
 
 .zippy-form__checkbox-wrap {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
 }
 
@@ -200,15 +225,16 @@ $fs-color-success: #45b69c;
 }
 
 .zippy-form__submit-btn {
-    border: 1px solid $fs-color-success;
-    background-color: $primary-color;
-    color: #fff;
-    padding: 4px 40px;
-    font-weight: 400;
+    border: 1px solid var(--az-button-primary-bg);
+    background-color: var(--az-button-primary-bg);
+    color: var(--az-button-primary-color);
+    padding: 15px 38px;
+    font-weight: 500;
     font-size: 14px;
+    border-radius: 99px;
+    margin-top: 20px;
     &:hover {
-        background-color: $primary-color;
-        color: $fs-color-success;
+        background-color: white;
     }
 }
 .zippy-field-error {
