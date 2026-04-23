@@ -137,77 +137,80 @@ $wrapper_attributes = get_block_wrapper_attributes([
     <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
     data-autoplay="<?php echo !empty($attrs['autoplay']) ? 'true' : 'false'; ?>"
     data-autoplay-delay="<?php echo esc_attr((string) $autoplay_delay); ?>"
+    data-show-arrows="<?php echo !empty($attrs['showArrows']) ? 'true' : 'false'; ?>"
+    data-show-dots="<?php echo !empty($attrs['showDots']) ? 'true' : 'false'; ?>"
 >
-    <div class="home-banner__slides">
-        <?php foreach ($slides as $index => $slide) : ?>
-            <?php
-            $slide = wp_parse_args((array) $slide, $default_slide);
-            $image_url = trim((string) $slide['imageUrl']);
-            $slide_style = $image_url !== '' ? sprintf('background-image:url(%s);', esc_url($image_url)) : '';
-            $button_url = trim((string) $slide['buttonUrl']);
-            $button_label = trim((string) $slide['buttonLabel']);
-            $content_html = trim((string) $slide['contentHtml']);
-            if ($content_html === '' && (trim((string) $slide['title']) !== '' || trim((string) $slide['subtitle']) !== '')) {
-                $content_html = sprintf(
-                    '%1$s%2$s',
-                    trim((string) $slide['title']) !== '' ? '<h1>' . $slide['title'] . '</h1>' : '',
-                    trim((string) $slide['subtitle']) !== '' ? '<p>' . esc_html($slide['subtitle']) . '</p>' : ''
-                );
-            }
-            $button_style = '';
-            $button_background_color = sanitize_hex_color((string) $slide['buttonBackgroundColor']);
-            $button_text_color = sanitize_hex_color((string) $slide['buttonTextColor']);
-            if ($button_background_color) {
-                $button_style .= '--home-banner-button-bg:' . esc_attr($button_background_color) . ';';
-            }
-            if ($button_text_color) {
-                $button_style .= '--home-banner-button-color:' . esc_attr($button_text_color) . ';';
-            }
-            ?>
-            <div class="home-banner__slide<?php echo $index === 0 ? ' is-active' : ''; ?>" style="<?php echo esc_attr($slide_style); ?>">
-                <div class="home-banner__overlay" aria-hidden="true"></div>
-                <div class="home-banner__inner az-section__inner">
-                    <div class="home-banner__content">
-                        <?php if (trim((string) $slide['eyebrow']) !== '') : ?>
-                            <p class="home-banner__eyebrow"><?php echo esc_html($slide['eyebrow']); ?></p>
-                        <?php endif; ?>
-                        <?php if ($content_html !== '') : ?>
-                            <div class="home-banner__copy"><?php echo wp_kses_post($content_html); ?></div>
-                        <?php endif; ?>
-                        <?php if ($button_label !== '') : ?>
-                            <?php if ($button_url !== '') : ?>
-                                <a
-                                    class="home-banner__button az-button az-button--medium"
-                                    href="<?php echo esc_url($button_url); ?>"
-                                    style="<?php echo esc_attr($button_style); ?>"
-                                    <?php echo !empty($slide['buttonNewTab']) ? 'target="_blank" rel="noopener noreferrer"' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-                                >
-                                    <?php echo esc_html($button_label); ?>
-                                </a>
-                            <?php else : ?>
-                                <span class="home-banner__button az-button az-button--medium" style="<?php echo esc_attr($button_style); ?>"><?php echo esc_html($button_label); ?></span>
+    <div class="home-banner__slider swiper">
+        <div class="home-banner__slides swiper-wrapper">
+            <?php foreach ($slides as $index => $slide) : ?>
+                <?php
+                $slide = wp_parse_args((array) $slide, $default_slide);
+                $image_url = trim((string) $slide['imageUrl']);
+                $image_alt = trim((string) $slide['imageAlt']);
+                $button_url = trim((string) $slide['buttonUrl']);
+                $button_label = trim((string) $slide['buttonLabel']);
+                $content_html = trim((string) $slide['contentHtml']);
+                if ($content_html === '' && (trim((string) $slide['title']) !== '' || trim((string) $slide['subtitle']) !== '')) {
+                    $content_html = sprintf(
+                        '%1$s%2$s',
+                        trim((string) $slide['title']) !== '' ? '<h1>' . $slide['title'] . '</h1>' : '',
+                        trim((string) $slide['subtitle']) !== '' ? '<p>' . esc_html($slide['subtitle']) . '</p>' : ''
+                    );
+                }
+                $button_style = '';
+                $button_background_color = sanitize_hex_color((string) $slide['buttonBackgroundColor']);
+                $button_text_color = sanitize_hex_color((string) $slide['buttonTextColor']);
+                if ($button_background_color) {
+                    $button_style .= '--home-banner-button-bg:' . esc_attr($button_background_color) . ';';
+                }
+                if ($button_text_color) {
+                    $button_style .= '--home-banner-button-color:' . esc_attr($button_text_color) . ';';
+                }
+                ?>
+                <div class="home-banner__slide swiper-slide<?php echo $index === 0 ? ' is-active' : ''; ?>">
+                    <?php if ($image_url !== '') : ?>
+                        <img class="home-banner__image" src="<?php echo esc_url($image_url); ?>" alt="<?php echo esc_attr($image_alt); ?>" loading="<?php echo 0 === $index ? 'eager' : 'lazy'; ?>" decoding="async">
+                    <?php endif; ?>
+                    <div class="home-banner__overlay" aria-hidden="true"></div>
+                    <div class="home-banner__inner az-section__inner">
+                        <div class="home-banner__content">
+                            <?php if (trim((string) $slide['eyebrow']) !== '') : ?>
+                                <p class="home-banner__eyebrow"><?php echo esc_html($slide['eyebrow']); ?></p>
                             <?php endif; ?>
-                        <?php endif; ?>
+                            <?php if ($content_html !== '') : ?>
+                                <div class="home-banner__copy"><?php echo wp_kses_post($content_html); ?></div>
+                            <?php endif; ?>
+                            <?php if ($button_label !== '') : ?>
+                                <?php if ($button_url !== '') : ?>
+                                    <a
+                                        class="home-banner__button az-button az-button--medium"
+                                        href="<?php echo esc_url($button_url); ?>"
+                                        style="<?php echo esc_attr($button_style); ?>"
+                                        <?php echo !empty($slide['buttonNewTab']) ? 'target="_blank" rel="noopener noreferrer"' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                                    >
+                                        <?php echo esc_html($button_label); ?>
+                                    </a>
+                                <?php else : ?>
+                                    <span class="home-banner__button az-button az-button--medium" style="<?php echo esc_attr($button_style); ?>"><?php echo esc_html($button_label); ?></span>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
-
-    <?php if (!empty($attrs['showArrows']) && count($slides) > 1) : ?>
-        <button class="home-banner__arrow home-banner__arrow--prev" type="button" aria-label="<?php esc_attr_e('Previous slide', 'ai-zippy-child'); ?>">
-            <span aria-hidden="true"></span>
-        </button>
-        <button class="home-banner__arrow home-banner__arrow--next" type="button" aria-label="<?php esc_attr_e('Next slide', 'ai-zippy-child'); ?>">
-            <span aria-hidden="true"></span>
-        </button>
-    <?php endif; ?>
-
-    <?php if (!empty($attrs['showDots']) && count($slides) > 1) : ?>
-        <div class="home-banner__dots" role="tablist" aria-label="<?php esc_attr_e('Banner slides', 'ai-zippy-child'); ?>">
-            <?php foreach ($slides as $index => $_slide) : ?>
-                <button class="home-banner__dot<?php echo $index === 0 ? ' is-active' : ''; ?>" type="button" data-slide="<?php echo esc_attr((string) $index); ?>" aria-label="<?php echo esc_attr(sprintf(__('Go to slide %d', 'ai-zippy-child'), $index + 1)); ?>"></button>
             <?php endforeach; ?>
         </div>
-    <?php endif; ?>
+
+        <?php if (!empty($attrs['showArrows']) && count($slides) > 1) : ?>
+            <button class="home-banner__arrow home-banner__arrow--prev" type="button" aria-label="<?php esc_attr_e('Previous slide', 'ai-zippy-child'); ?>">
+                <span aria-hidden="true"></span>
+            </button>
+            <button class="home-banner__arrow home-banner__arrow--next" type="button" aria-label="<?php esc_attr_e('Next slide', 'ai-zippy-child'); ?>">
+                <span aria-hidden="true"></span>
+            </button>
+        <?php endif; ?>
+
+        <?php if (!empty($attrs['showDots']) && count($slides) > 1) : ?>
+            <div class="home-banner__dots home-banner__pagination"></div>
+        <?php endif; ?>
+    </div>
 </section>

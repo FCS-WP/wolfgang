@@ -19,3 +19,29 @@
 	margin-top: 14px;
 	padding-top: 14px;
 }
+
+.home-services-editor__icon-media {
+	align-items: center;
+	display: grid;
+	gap: 8px;
+	grid-template-columns: 54px 1fr;
+	margin-bottom: 12px;
+
+	img,
+	span {
+		align-items: center;
+		aspect-ratio: 1;
+		background: #f1f1f1;
+		display: flex;
+		font-size: 11px;
+		justify-content: center;
+		object-fit: contain;
+		padding: 6px;
+		text-align: center;
+		width: 54px;
+	}
+
+	button {
+		justify-self: start;
+	}
+}
