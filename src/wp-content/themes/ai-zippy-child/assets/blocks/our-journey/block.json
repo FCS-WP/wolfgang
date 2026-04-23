@@ -1,0 +1,142 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ai-zippy-child/our-journey",
+  "version": "1.0.0",
+  "title": "Our Journey",
+  "category": "ai-zippy-page",
+  "icon": "chart-line",
+  "description": "Editable Our Journey timeline section.",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "layout": {
+      "type": "string",
+      "default": "boxed"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "paddingTop": {
+      "type": "number",
+      "default": 70
+    },
+    "paddingRight": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingBottom": {
+      "type": "number",
+      "default": 90
+    },
+    "paddingLeft": {
+      "type": "number",
+      "default": 0
+    },
+    "marginTop": {
+      "type": "number",
+      "default": 0
+    },
+    "marginBottom": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingTopTablet": {
+      "type": "number"
+    },
+    "paddingRightTablet": {
+      "type": "number"
+    },
+    "paddingBottomTablet": {
+      "type": "number"
+    },
+    "paddingLeftTablet": {
+      "type": "number"
+    },
+    "marginTopTablet": {
+      "type": "number"
+    },
+    "marginBottomTablet": {
+      "type": "number"
+    },
+    "paddingTopMobile": {
+      "type": "number"
+    },
+    "paddingRightMobile": {
+      "type": "number"
+    },
+    "paddingBottomMobile": {
+      "type": "number"
+    },
+    "paddingLeftMobile": {
+      "type": "number"
+    },
+    "marginTopMobile": {
+      "type": "number"
+    },
+    "marginBottomMobile": {
+      "type": "number"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Our Journey"
+    },
+    "accentStartColor": {
+      "type": "string",
+      "default": "#0167ff"
+    },
+    "accentEndColor": {
+      "type": "string",
+      "default": "#c5fda2"
+    },
+    "cardWidth": {
+      "type": "number",
+      "default": 820
+    },
+    "cardGap": {
+      "type": "number",
+      "default": 380
+    },
+    "items": {
+      "type": "array",
+      "default": [
+        {
+          "imageId": 0,
+          "imageUrl": "",
+          "imageAlt": "",
+          "year": "2009",
+          "title": "EPOS is born",
+          "description": "Started as a point-of-sale solutions provider helping businesses streamline operations, we've grown from a small POS startup into the beginning of something bigger."
+        },
+        {
+          "imageId": 0,
+          "imageUrl": "",
+          "imageAlt": "",
+          "year": "2022",
+          "title": "Welcoming Wolfgang",
+          "description": "EPOS acquired Wolfgang Ethos and Zippy, adding creative, marketing, and WhatsApp marketing services to its connected all-in-one solutions."
+        }
+      ]
+    }
+  },
+  "textdomain": "ai-zippy-child",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

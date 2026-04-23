@@ -1,0 +1,196 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ai-zippy-child/home-banner",
+  "version": "1.0.0",
+  "title": "Home Banner",
+  "category": "ai-zippy-page",
+  "icon": "cover-image",
+  "description": "Full-width homepage hero slider with editable slides.",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "layout": {
+      "type": "string",
+      "default": "full"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "paddingTop": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingRight": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingBottom": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingLeft": {
+      "type": "number",
+      "default": 0
+    },
+    "marginTop": {
+      "type": "number",
+      "default": 0
+    },
+    "marginBottom": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingTopTablet": {
+      "type": "number"
+    },
+    "paddingRightTablet": {
+      "type": "number"
+    },
+    "paddingBottomTablet": {
+      "type": "number"
+    },
+    "paddingLeftTablet": {
+      "type": "number"
+    },
+    "marginTopTablet": {
+      "type": "number"
+    },
+    "marginBottomTablet": {
+      "type": "number"
+    },
+    "paddingTopMobile": {
+      "type": "number"
+    },
+    "paddingRightMobile": {
+      "type": "number"
+    },
+    "paddingBottomMobile": {
+      "type": "number"
+    },
+    "paddingLeftMobile": {
+      "type": "number"
+    },
+    "marginTopMobile": {
+      "type": "number"
+    },
+    "marginBottomMobile": {
+      "type": "number"
+    },
+    "slides": {
+      "type": "array",
+      "default": [
+        {
+          "imageId": 0,
+          "imageUrl": "",
+          "imageAlt": "",
+          "eyebrow": "",
+          "title": "We're the Best<br>SME Agency",
+          "subtitle": "500 happy clients served",
+          "contentHtml": "<h1>We're the Best<br>SME Agency</h1><p>500 happy clients served</p>",
+          "buttonLabel": "Contact us",
+          "buttonUrl": "/contact-us",
+          "buttonNewTab": false,
+          "buttonBackgroundColor": "#c8ff9a",
+          "buttonTextColor": "#000000"
+        }
+      ]
+    },
+    "height": {
+      "type": "number",
+      "default": 650
+    },
+    "containerWidth": {
+      "type": "number",
+      "default": 1180
+    },
+    "contentWidth": {
+      "type": "number",
+      "default": 980
+    },
+    "contentPaddingTop": {
+      "type": "number",
+      "default": 90
+    },
+    "contentPaddingRight": {
+      "type": "number",
+      "default": 96
+    },
+    "contentPaddingBottom": {
+      "type": "number",
+      "default": 90
+    },
+    "contentPaddingLeft": {
+      "type": "number",
+      "default": 96
+    },
+    "contentPaddingTopTablet": {
+      "type": "number"
+    },
+    "contentPaddingRightTablet": {
+      "type": "number"
+    },
+    "contentPaddingBottomTablet": {
+      "type": "number"
+    },
+    "contentPaddingLeftTablet": {
+      "type": "number"
+    },
+    "contentPaddingTopMobile": {
+      "type": "number"
+    },
+    "contentPaddingRightMobile": {
+      "type": "number"
+    },
+    "contentPaddingBottomMobile": {
+      "type": "number"
+    },
+    "contentPaddingLeftMobile": {
+      "type": "number"
+    },
+    "showOverlay": {
+      "type": "boolean",
+      "default": false
+    },
+    "overlayOpacity": {
+      "type": "number",
+      "default": 44
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": true
+    },
+    "autoplayDelay": {
+      "type": "number",
+      "default": 6000
+    },
+    "showArrows": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDots": {
+      "type": "boolean",
+      "default": true
+    }
+  },
+  "textdomain": "ai-zippy-child",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

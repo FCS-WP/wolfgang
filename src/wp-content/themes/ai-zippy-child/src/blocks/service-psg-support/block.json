@@ -1,0 +1,68 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ai-zippy-child/service-psg-support",
+	"version": "1.0.0",
+	"title": "Service PSG Support",
+	"category": "ai-zippy-page",
+	"icon": "awards",
+	"description": "Service page grant support section with images and stats.",
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"attributes": {
+		"align": { "type": "string", "default": "full" },
+		"layout": { "type": "string", "default": "boxed" },
+		"backgroundColor": { "type": "string", "default": "#000000" },
+		"textColor": { "type": "string", "default": "#ffffff" },
+		"paddingTop": { "type": "number", "default": 80 },
+		"paddingRight": { "type": "number", "default": 0 },
+		"paddingBottom": { "type": "number", "default": 110 },
+		"paddingLeft": { "type": "number", "default": 0 },
+		"marginTop": { "type": "number", "default": 0 },
+		"marginBottom": { "type": "number", "default": 0 },
+		"paddingTopTablet": { "type": "number" },
+		"paddingRightTablet": { "type": "number" },
+		"paddingBottomTablet": { "type": "number" },
+		"paddingLeftTablet": { "type": "number" },
+		"marginTopTablet": { "type": "number" },
+		"marginBottomTablet": { "type": "number" },
+		"paddingTopMobile": { "type": "number" },
+		"paddingRightMobile": { "type": "number" },
+		"paddingBottomMobile": { "type": "number" },
+		"paddingLeftMobile": { "type": "number" },
+		"marginTopMobile": { "type": "number" },
+		"marginBottomMobile": { "type": "number" },
+		"heading": { "type": "string", "default": "Up to 50% Productivity Solutions Grant (PSG) Support" },
+		"description": {
+			"type": "string",
+			"default": "Eligible businesses can claim up to 50% support through PSG, with potential for further funding via other schemes. Discover which grants you qualify for and how to get started today."
+		},
+		"imageId": { "type": "number", "default": 0 },
+		"imageUrl": { "type": "string", "default": "" },
+		"imageAlt": { "type": "string", "default": "" },
+		"featureHeading": { "type": "string", "default": "Trusted Government Grants Vendor in Singapore" },
+		"stats": {
+			"type": "array",
+			"default": [
+				{ "value": "8+ years", "label": "of experience as PSG pre-approved vendor" },
+				{ "value": "30M", "label": "Amount of grants applied and approved" }
+			]
+		},
+		"badgeImageId": { "type": "number", "default": 0 },
+		"badgeImageUrl": { "type": "string", "default": "" },
+		"badgeImageAlt": { "type": "string", "default": "" },
+		"body": {
+			"type": "string",
+			"default": "SMEs are eligible for up to 50% Productivity Solutions Grant (PSG) support for the adoption of EPOS Pre-Approved Solutions under the IMDA SMEs Go Digital programme."
+		},
+		"imageRadius": { "type": "number", "default": 8 },
+		"contentGap": { "type": "number", "default": 56 }
+	},
+	"textdomain": "ai-zippy-child",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

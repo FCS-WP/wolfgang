@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ai-zippy-child/site-footer",
+	"version": "1.0.0",
+	"title": "Site Footer",
+	"category": "ai-zippy-site",
+	"icon": "editor-kitchensink",
+	"description": "Clean project footer shell with editable logo, menu, and copyright.",
+	"supports": {
+		"html": false,
+		"align": ["full"]
+	},
+	"attributes": {
+		"align": { "type": "string", "default": "full" },
+		"logoId": { "type": "number", "default": 0 },
+		"logoUrl": { "type": "string", "default": "" },
+		"logoAlt": { "type": "string", "default": "" },
+		"logoWidth": { "type": "number", "default": 190 },
+		"logoHeight": { "type": "number", "default": 54 },
+		"description": { "type": "string", "default": "Wolfgang Ethos is a local AI-driven creative agency that provides an all-in-one solution for SMEs." },
+		"menuId": { "type": "number", "default": 0 },
+		"fallbackLinks": {
+			"type": "array",
+			"default": [
+				{ "label": "Home", "url": "/" },
+				{ "label": "Our Story", "url": "/our-story" },
+				{ "label": "Our Services", "url": "/our-services" },
+				{ "label": "Our Projects", "url": "/our-projects" },
+				{ "label": "Contact Us", "url": "/contact-us" }
+			]
+		},
+		"contactText": { "type": "string", "default": "T: 65 1234 5678<br>E: care@ethoscreatives.com<br><br>51 Bras Basah Rd,<br>Singapore 189554" },
+		"copyright": { "type": "string", "default": "© 2025. All rights reserved." }
+	},
+	"textdomain": "ai-zippy-child",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

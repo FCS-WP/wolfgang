@@ -1,0 +1,24 @@
+.testimonials-editor__item {
+	border-top: 1px solid #ddd;
+	margin-top: 14px;
+	padding-top: 14px;
+}
+
+.testimonials-editor__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 10px;
+}
+
+.editor-styles-wrapper .testimonials__track {
+	transform: none !important;
+}
+
+.editor-styles-wrapper .testimonials__slide {
+	display: none;
+}
+
+.editor-styles-wrapper .testimonials__slide.is-active {
+	display: block;
+}

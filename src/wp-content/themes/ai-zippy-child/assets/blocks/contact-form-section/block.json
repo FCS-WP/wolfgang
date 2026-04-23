@@ -1,0 +1,132 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ai-zippy-child/contact-form-section",
+  "version": "1.0.0",
+  "title": "Contact Form Section",
+  "category": "ai-zippy-page",
+  "icon": "phone",
+  "description": "Contact page section with contact details and form embed.",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "layout": {
+      "type": "string",
+      "default": "boxed"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "paddingTop": {
+      "type": "number",
+      "default": 86
+    },
+    "paddingRight": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingBottom": {
+      "type": "number",
+      "default": 96
+    },
+    "paddingLeft": {
+      "type": "number",
+      "default": 0
+    },
+    "marginTop": {
+      "type": "number",
+      "default": 0
+    },
+    "marginBottom": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingTopTablet": {
+      "type": "number"
+    },
+    "paddingRightTablet": {
+      "type": "number"
+    },
+    "paddingBottomTablet": {
+      "type": "number"
+    },
+    "paddingLeftTablet": {
+      "type": "number"
+    },
+    "marginTopTablet": {
+      "type": "number"
+    },
+    "marginBottomTablet": {
+      "type": "number"
+    },
+    "paddingTopMobile": {
+      "type": "number"
+    },
+    "paddingRightMobile": {
+      "type": "number"
+    },
+    "paddingBottomMobile": {
+      "type": "number"
+    },
+    "paddingLeftMobile": {
+      "type": "number"
+    },
+    "marginTopMobile": {
+      "type": "number"
+    },
+    "marginBottomMobile": {
+      "type": "number"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Lets Make<br>Something<br>Awesome<br>Together."
+    },
+    "contacts": {
+      "type": "array",
+      "default": [
+        {
+          "icon": "phone",
+          "label": "65 1234 5678",
+          "url": "tel:+6512345678"
+        },
+        {
+          "icon": "email",
+          "label": "care@ethoscreatives.com",
+          "url": "mailto:care@ethoscreatives.com"
+        },
+        {
+          "icon": "location",
+          "label": "51 Bras Basah Rd, Singapore 189554",
+          "url": ""
+        }
+      ]
+    },
+    "embedHtml": {
+      "type": "string",
+      "default": "[custom_form submit_text=\"Submit\"]\n[form_input type=\"text\" label=\"First name\" required=\"true\" width=\"50%\"]\n[form_input type=\"text\" label=\"Last name\" width=\"50%\"]\n[form_phone label=\"Phone\" required=\"true\" width=\"100%\" initial_country=\"sg\"]\n[form_input type=\"email\" label=\"Email\" required=\"true\" width=\"100%\"]\n[form_select label=\"Nature of Business\" options=\"Food & Beverage,Retail,Services\" required=\"true\" width=\"100%\"]\n[form_select label=\"Type of Services\" options=\"Website,Digital Marketing,Creative Services\" required=\"true\" width=\"100%\"]\n[/custom_form]"
+    },
+    "columnGap": {
+      "type": "number",
+      "default": 78
+    }
+  },
+  "textdomain": "ai-zippy-child",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

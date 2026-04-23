@@ -1,0 +1,140 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ai-zippy-child/testimonials",
+  "version": "1.0.0",
+  "title": "Testimonials",
+  "category": "ai-zippy-page",
+  "icon": "format-quote",
+  "description": "Editable testimonial slider with arrows and pagination dots.",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "layout": {
+      "type": "string",
+      "default": "boxed"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#c8ff9a"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "paddingTop": {
+      "type": "number",
+      "default": 136
+    },
+    "paddingRight": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingBottom": {
+      "type": "number",
+      "default": 116
+    },
+    "paddingLeft": {
+      "type": "number",
+      "default": 0
+    },
+    "marginTop": {
+      "type": "number",
+      "default": 0
+    },
+    "marginBottom": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingTopTablet": {
+      "type": "number"
+    },
+    "paddingRightTablet": {
+      "type": "number"
+    },
+    "paddingBottomTablet": {
+      "type": "number"
+    },
+    "paddingLeftTablet": {
+      "type": "number"
+    },
+    "marginTopTablet": {
+      "type": "number"
+    },
+    "marginBottomTablet": {
+      "type": "number"
+    },
+    "paddingTopMobile": {
+      "type": "number"
+    },
+    "paddingRightMobile": {
+      "type": "number"
+    },
+    "paddingBottomMobile": {
+      "type": "number"
+    },
+    "paddingLeftMobile": {
+      "type": "number"
+    },
+    "marginTopMobile": {
+      "type": "number"
+    },
+    "marginBottomMobile": {
+      "type": "number"
+    },
+    "eyebrow": {
+      "type": "string",
+      "default": "What Clients Say"
+    },
+    "quoteMaxWidth": {
+      "type": "number",
+      "default": 820
+    },
+    "autoplay": {
+      "type": "boolean",
+      "default": false
+    },
+    "autoplayDelay": {
+      "type": "number",
+      "default": 6000
+    },
+    "showArrows": {
+      "type": "boolean",
+      "default": true
+    },
+    "showDots": {
+      "type": "boolean",
+      "default": true
+    },
+    "items": {
+      "type": "array",
+      "default": [
+        {
+          "quote": "\"Add a testimonial and showcase positive feedback from a happy client or customer.\"",
+          "name": "Client 01",
+          "company": "Company's Name"
+        },
+        {
+          "quote": "\"Their team helped us move faster, sharpen our campaigns, and make every touchpoint feel more connected.\"",
+          "name": "Client 02",
+          "company": "Company's Name"
+        }
+      ]
+    }
+  },
+  "textdomain": "ai-zippy-child",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "viewScript": "file:./view.js",
+  "render": "file:./render.php"
+}

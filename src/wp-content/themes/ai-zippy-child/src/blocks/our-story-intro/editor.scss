@@ -1,0 +1,24 @@
+.our-story-intro-editor__card {
+	border-top: 1px solid #ddd;
+	margin-top: 14px;
+	padding-top: 14px;
+}
+
+.our-story-intro-editor__icon,
+.our-story-intro-editor__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.our-story-intro-editor__icon img,
+.our-story-intro-editor__icon svg {
+	background: #111;
+	border-radius: 4px;
+	box-sizing: border-box;
+	height: 52px;
+	object-fit: contain;
+	padding: 8px;
+	width: 52px;
+}

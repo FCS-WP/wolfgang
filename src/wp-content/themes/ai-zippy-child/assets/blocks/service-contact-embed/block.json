@@ -1,0 +1,116 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ai-zippy-child/service-contact-embed",
+  "version": "1.0.0",
+  "title": "Service Contact Embed",
+  "category": "ai-zippy-page",
+  "icon": "email-alt2",
+  "description": "Service page contact section with editable heading and form HTML embed.",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "layout": {
+      "type": "string",
+      "default": "boxed"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#1b1b1b"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "paddingTop": {
+      "type": "number",
+      "default": 96
+    },
+    "paddingRight": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingBottom": {
+      "type": "number",
+      "default": 112
+    },
+    "paddingLeft": {
+      "type": "number",
+      "default": 0
+    },
+    "marginTop": {
+      "type": "number",
+      "default": 0
+    },
+    "marginBottom": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingTopTablet": {
+      "type": "number"
+    },
+    "paddingRightTablet": {
+      "type": "number"
+    },
+    "paddingBottomTablet": {
+      "type": "number"
+    },
+    "paddingLeftTablet": {
+      "type": "number"
+    },
+    "marginTopTablet": {
+      "type": "number"
+    },
+    "marginBottomTablet": {
+      "type": "number"
+    },
+    "paddingTopMobile": {
+      "type": "number"
+    },
+    "paddingRightMobile": {
+      "type": "number"
+    },
+    "paddingBottomMobile": {
+      "type": "number"
+    },
+    "paddingLeftMobile": {
+      "type": "number"
+    },
+    "marginTopMobile": {
+      "type": "number"
+    },
+    "marginBottomMobile": {
+      "type": "number"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Ready to Take The Next Step?"
+    },
+    "embedHtml": {
+      "type": "string",
+      "default": "<form><div class=\"service-contact-embed__row\"><label>First name *<input type=\"text\" name=\"first-name\"></label><label>Last name<input type=\"text\" name=\"last-name\"></label></div><label>Phone *<input type=\"tel\" name=\"phone\"></label><label>Email *<input type=\"email\" name=\"email\"></label><label>Nature of Business *<select name=\"business\"><option value=\"\"></option><option>Retail</option><option>Food & Beverage</option><option>Services</option></select></label><label>Type of Services *<select name=\"service\"><option value=\"\"></option><option>Digital Marketing</option><option>Website</option><option>Creative Services</option></select></label><button type=\"submit\">Submit</button></form>"
+    },
+    "contentWidth": {
+      "type": "number",
+      "default": 760
+    },
+    "headingBottomGap": {
+      "type": "number",
+      "default": 42
+    }
+  },
+  "textdomain": "ai-zippy-child",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

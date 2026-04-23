@@ -1,0 +1,37 @@
+.our-journey-editor__item {
+	border-top: 1px solid #ddd;
+	margin-top: 14px;
+	padding-top: 14px;
+}
+
+.our-journey-editor__media {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.our-journey-editor__media img,
+.our-journey-editor__media div {
+	background: #eee;
+	height: 72px;
+	object-fit: cover;
+	width: 144px;
+}
+
+.editor-styles-wrapper .our-journey {
+	min-height: auto;
+}
+
+.editor-styles-wrapper .our-journey__sticky {
+	min-height: auto;
+	position: relative;
+}
+
+.editor-styles-wrapper .our-journey__viewport {
+	overflow-x: auto;
+}
+
+.editor-styles-wrapper .our-journey__track {
+	transform: none !important;
+}

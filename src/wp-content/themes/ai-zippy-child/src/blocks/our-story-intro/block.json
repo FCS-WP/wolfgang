@@ -1,0 +1,75 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ai-zippy-child/our-story-intro",
+	"version": "1.0.0",
+	"title": "Our Story Intro",
+	"category": "ai-zippy-page",
+	"icon": "book",
+	"description": "Intro section for the Our Story page with story copy and editable vision/mission cards.",
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"attributes": {
+		"align": { "type": "string", "default": "full" },
+		"layout": { "type": "string", "default": "boxed" },
+		"backgroundColor": { "type": "string", "default": "#c8ff9a" },
+		"textColor": { "type": "string", "default": "#000000" },
+		"paddingTop": { "type": "number", "default": 110 },
+		"paddingRight": { "type": "number", "default": 0 },
+		"paddingBottom": { "type": "number", "default": 110 },
+		"paddingLeft": { "type": "number", "default": 0 },
+		"marginTop": { "type": "number", "default": 0 },
+		"marginBottom": { "type": "number", "default": 0 },
+		"paddingTopTablet": { "type": "number" },
+		"paddingRightTablet": { "type": "number" },
+		"paddingBottomTablet": { "type": "number" },
+		"paddingLeftTablet": { "type": "number" },
+		"marginTopTablet": { "type": "number" },
+		"marginBottomTablet": { "type": "number" },
+		"paddingTopMobile": { "type": "number" },
+		"paddingRightMobile": { "type": "number" },
+		"paddingBottomMobile": { "type": "number" },
+		"paddingLeftMobile": { "type": "number" },
+		"marginTopMobile": { "type": "number" },
+		"marginBottomMobile": { "type": "number" },
+		"heading": { "type": "string", "default": "Our Story" },
+		"body": {
+			"type": "string",
+			"default": "Wolfgang Ethos is the creative and marketing arm of EPOS, focused on helping SMEs grow through strategic, results-driven campaigns. By combining local insights with expertise in digital marketing, website development, and WhatsApp engagement, Wolfgang delivers integrated solutions that drive real business impact.\n\nBacked by EPOS and strengthened by ANT Group's 2025 investment, Wolfgang is uniquely positioned to scale smarter, more connected marketing solutions for merchants."
+		},
+		"cardRadius": { "type": "number", "default": 8 },
+		"cardMinHeight": { "type": "number", "default": 290 },
+		"cardBackgroundColor": { "type": "string", "default": "#000000" },
+		"cardTextColor": { "type": "string", "default": "#ffffff" },
+		"cardAccentStartColor": { "type": "string", "default": "#1688ff" },
+		"cardAccentEndColor": { "type": "string", "default": "#c8ff9a" },
+		"cards": {
+			"type": "array",
+			"default": [
+				{
+					"icon": "vision",
+					"iconId": 0,
+					"iconUrl": "",
+					"iconAlt": "",
+					"title": "Vision",
+					"description": ""
+				},
+				{
+					"icon": "mission",
+					"iconId": 0,
+					"iconUrl": "",
+					"iconAlt": "",
+					"title": "Mission",
+					"description": ""
+				}
+			]
+		}
+	},
+	"textdomain": "ai-zippy-child",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

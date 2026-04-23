@@ -1,0 +1,73 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ai-zippy-child/home-services",
+	"version": "1.0.0",
+	"title": "Home Services",
+	"category": "ai-zippy-page",
+	"icon": "portfolio",
+	"description": "Two-column services section with editable image, service list, and CTA.",
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"attributes": {
+		"align": { "type": "string", "default": "full" },
+		"layout": { "type": "string", "default": "boxed" },
+		"backgroundColor": { "type": "string", "default": "#c8ff9a" },
+		"textColor": { "type": "string", "default": "#000000" },
+		"paddingTop": { "type": "number", "default": 56 },
+		"paddingRight": { "type": "number", "default": 0 },
+		"paddingBottom": { "type": "number", "default": 86 },
+		"paddingLeft": { "type": "number", "default": 0 },
+		"marginTop": { "type": "number", "default": 0 },
+		"marginBottom": { "type": "number", "default": 0 },
+		"paddingTopTablet": { "type": "number" },
+		"paddingRightTablet": { "type": "number" },
+		"paddingBottomTablet": { "type": "number" },
+		"paddingLeftTablet": { "type": "number" },
+		"marginTopTablet": { "type": "number" },
+		"marginBottomTablet": { "type": "number" },
+		"paddingTopMobile": { "type": "number" },
+		"paddingRightMobile": { "type": "number" },
+		"paddingBottomMobile": { "type": "number" },
+		"paddingLeftMobile": { "type": "number" },
+		"marginTopMobile": { "type": "number" },
+		"marginBottomMobile": { "type": "number" },
+		"imageId": { "type": "number", "default": 0 },
+		"imageUrl": { "type": "string", "default": "" },
+		"imageAlt": { "type": "string", "default": "" },
+		"heading": { "type": "string", "default": "Our Services" },
+		"services": {
+			"type": "array",
+			"default": [
+				{
+					"icon": "megaphone",
+					"title": "Digital marketing",
+					"description": "Build your brand, reach the right audience, and turn attention into action with our end-to-end digital marketing expertise."
+				},
+				{
+					"icon": "globe",
+					"title": "Website",
+					"description": "We design high-converting, mobile-friendly websites that turn visitors into paying customers."
+				},
+				{
+					"icon": "bulb",
+					"title": "Creative services",
+					"description": "We craft compelling ideas into visuals and campaigns that elevate your brand."
+				}
+			]
+		},
+		"buttonLabel": { "type": "string", "default": "Find out more" },
+		"buttonUrl": { "type": "string", "default": "/our-services" },
+		"buttonNewTab": { "type": "boolean", "default": false },
+		"imageRadius": { "type": "number", "default": 12 },
+		"contentGap": { "type": "number", "default": 66 },
+		"itemGap": { "type": "number", "default": 48 }
+	},
+	"textdomain": "ai-zippy-child",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

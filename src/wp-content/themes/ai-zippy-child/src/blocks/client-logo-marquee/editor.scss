@@ -1,0 +1,29 @@
+.wp-block-ai-zippy-child-client-logo-marquee {
+	.client-logo-marquee__track {
+		animation-play-state: paused;
+	}
+}
+
+.client-logo-marquee-editor__logo {
+	border-top: 1px solid #ddd;
+	display: grid;
+	gap: 8px;
+	margin-top: 14px;
+	padding-top: 14px;
+
+	img {
+		background: #fff;
+		border: 1px solid #ddd;
+		border-radius: 999px;
+		height: 72px;
+		object-fit: contain;
+		padding: 10px;
+		width: 72px;
+	}
+}
+
+.client-logo-marquee-editor__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}

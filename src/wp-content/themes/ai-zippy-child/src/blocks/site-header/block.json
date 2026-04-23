@@ -1,0 +1,49 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ai-zippy-child/site-header",
+	"version": "1.0.0",
+	"title": "Site Header",
+	"category": "ai-zippy-site",
+	"icon": "admin-site",
+	"description": "Clean project header shell with editable logo, menu, and CTA.",
+	"supports": {
+		"html": false,
+		"align": ["full"]
+	},
+	"attributes": {
+		"align": { "type": "string", "default": "full" },
+		"logoId": { "type": "number", "default": 0 },
+		"logoUrl": { "type": "string", "default": "" },
+		"logoAlt": { "type": "string", "default": "" },
+		"logoWidth": { "type": "number", "default": 190 },
+		"logoHeight": { "type": "number", "default": 52 },
+		"menuId": { "type": "number", "default": 0 },
+		"fallbackLinks": {
+			"type": "array",
+			"default": [
+				{ "label": "Home", "url": "/" },
+				{ "label": "Our Story", "url": "/our-story" },
+				{ "label": "Our Services", "url": "/our-services" },
+				{ "label": "Our Projects", "url": "/our-projects" }
+			]
+		},
+		"ctaText": { "type": "string", "default": "Contact us" },
+		"ctaUrl": { "type": "string", "default": "/contact-us" },
+		"paddingTop": { "type": "number", "default": 26 },
+		"paddingRight": { "type": "number" },
+		"paddingBottom": { "type": "number", "default": 26 },
+		"paddingLeft": { "type": "number" },
+		"marginTop": { "type": "number", "default": 0 },
+		"marginBottom": { "type": "number", "default": 0 },
+		"isSticky": { "type": "boolean", "default": false },
+		"stickyTop": { "type": "number", "default": 0 },
+		"stickyZIndex": { "type": "number", "default": 900 }
+	},
+	"textdomain": "ai-zippy-child",
+	"editorScript": "file:./index.js",
+	"viewScript": "file:./view.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

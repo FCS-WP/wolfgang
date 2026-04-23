@@ -1,0 +1,55 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ai-zippy-child/home-stats",
+	"version": "1.0.0",
+	"title": "Home Stats",
+	"category": "ai-zippy-page",
+	"icon": "chart-bar",
+	"description": "Editable statistics row for homepage metrics.",
+	"supports": {
+		"html": false,
+		"align": ["wide", "full"]
+	},
+	"attributes": {
+		"align": { "type": "string", "default": "full" },
+		"layout": { "type": "string", "default": "boxed" },
+		"backgroundColor": { "type": "string", "default": "#000000" },
+		"textColor": { "type": "string", "default": "#ffffff" },
+		"paddingTop": { "type": "number", "default": 120 },
+		"paddingRight": { "type": "number", "default": 0 },
+		"paddingBottom": { "type": "number", "default": 70 },
+		"paddingLeft": { "type": "number", "default": 0 },
+		"marginTop": { "type": "number", "default": 0 },
+		"marginBottom": { "type": "number", "default": 0 },
+		"paddingTopTablet": { "type": "number" },
+		"paddingRightTablet": { "type": "number" },
+		"paddingBottomTablet": { "type": "number" },
+		"paddingLeftTablet": { "type": "number" },
+		"marginTopTablet": { "type": "number" },
+		"marginBottomTablet": { "type": "number" },
+		"paddingTopMobile": { "type": "number" },
+		"paddingRightMobile": { "type": "number" },
+		"paddingBottomMobile": { "type": "number" },
+		"paddingLeftMobile": { "type": "number" },
+		"marginTopMobile": { "type": "number" },
+		"marginBottomMobile": { "type": "number" },
+		"items": {
+			"type": "array",
+			"default": [
+				{ "value": "1000+", "label": "client served" },
+				{ "value": "100%", "label": "claim rate" },
+				{ "value": "5", "label": "years of expertise" }
+			]
+		},
+		"startColor": { "type": "string", "default": "#b8ff9b" },
+		"endColor": { "type": "string", "default": "#1688ff" },
+		"columns": { "type": "number", "default": 3 },
+		"gap": { "type": "number", "default": 72 }
+	},
+	"textdomain": "ai-zippy-child",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}
