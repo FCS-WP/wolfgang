@@ -4,16 +4,25 @@ defined('ABSPATH') || exit;
 $default_services = [
     [
         'icon' => 'megaphone',
+        'iconImageId' => 0,
+        'iconImageUrl' => '',
+        'iconImageAlt' => '',
         'title' => 'Digital marketing',
         'description' => 'Build your brand, reach the right audience, and turn attention into action with our end-to-end digital marketing expertise.',
     ],
     [
         'icon' => 'globe',
+        'iconImageId' => 0,
+        'iconImageUrl' => '',
+        'iconImageAlt' => '',
         'title' => 'Website',
         'description' => 'We design high-converting, mobile-friendly websites that turn visitors into paying customers.',
     ],
     [
         'icon' => 'bulb',
+        'iconImageId' => 0,
+        'iconImageUrl' => '',
+        'iconImageAlt' => '',
         'title' => 'Creative services',
         'description' => 'We craft compelling ideas into visuals and campaigns that elevate your brand.',
     ],
@@ -31,6 +40,11 @@ $attrs = wp_parse_args($attributes ?? [], [
     'marginBottom' => 0,
     'imageUrl' => '',
     'imageAlt' => '',
+    'imageWidth' => 100,
+    'imageAspectRatio' => '1 / 1.5',
+    'imageObjectFit' => 'cover',
+    'imageObjectPosition' => 'center center',
+    'imageAlignment' => 'center',
     'heading' => 'Our Services',
     'services' => $default_services,
     'buttonLabel' => 'Find out more',
@@ -44,6 +58,13 @@ $attrs = wp_parse_args($attributes ?? [], [
 $layout = in_array($attrs['layout'], ['boxed', 'wide', 'full'], true) ? $attrs['layout'] : 'boxed';
 $services = is_array($attrs['services']) && $attrs['services'] ? $attrs['services'] : $default_services;
 $image_radius = min(max(absint($attrs['imageRadius']), 0), 40);
+$image_width = min(max(absint($attrs['imageWidth']), 45), 100);
+$allowed_aspect_ratios = ['1 / 1.5', '4 / 5', '1 / 1', '16 / 11', '3 / 4'];
+$image_aspect_ratio = in_array($attrs['imageAspectRatio'], $allowed_aspect_ratios, true) ? $attrs['imageAspectRatio'] : '1 / 1.5';
+$image_fit = in_array($attrs['imageObjectFit'], ['cover', 'contain'], true) ? $attrs['imageObjectFit'] : 'cover';
+$allowed_positions = ['center center', 'center top', 'center bottom', 'left center', 'right center'];
+$image_position = in_array($attrs['imageObjectPosition'], $allowed_positions, true) ? $attrs['imageObjectPosition'] : 'center center';
+$image_alignment = in_array($attrs['imageAlignment'], ['start', 'center', 'end'], true) ? $attrs['imageAlignment'] : 'center';
 $content_gap = min(max(absint($attrs['contentGap']), 24), 140);
 $item_gap = min(max(absint($attrs['itemGap']), 20), 90);
 
@@ -57,6 +78,11 @@ $style_values = [
     '--az-section-margin-top' => absint($attrs['marginTop']) . 'px',
     '--az-section-margin-bottom' => absint($attrs['marginBottom']) . 'px',
     '--home-services-image-radius' => $image_radius . 'px',
+    '--home-services-image-width' => $image_width . '%',
+    '--home-services-image-aspect-ratio' => $image_aspect_ratio,
+    '--home-services-image-fit' => $image_fit,
+    '--home-services-image-position' => $image_position,
+    '--home-services-image-align' => $image_alignment,
     '--home-services-content-gap' => $content_gap . 'px',
     '--home-services-item-gap' => $item_gap . 'px',
 ];
@@ -117,9 +143,21 @@ $render_icon = static function (string $icon): void {
             <?php endif; ?>
             <div class="home-services__list">
                 <?php foreach ($services as $service) : ?>
-                    <?php $service = wp_parse_args((array) $service, ['icon' => 'megaphone', 'title' => '', 'description' => '']); ?>
+                    <?php
+                    $service = wp_parse_args((array) $service, [
+                        'icon' => 'megaphone',
+                        'iconImageUrl' => '',
+                        'iconImageAlt' => '',
+                        'title' => '',
+                        'description' => '',
+                    ]);
+                    ?>
                     <div class="home-services__item">
-                        <?php $render_icon((string) $service['icon']); ?>
+                        <?php if (trim((string) $service['iconImageUrl']) !== '') : ?>
+                            <img class="home-services__icon-image" src="<?php echo esc_url($service['iconImageUrl']); ?>" alt="<?php echo esc_attr($service['iconImageAlt']); ?>">
+                        <?php else : ?>
+                            <?php $render_icon((string) $service['icon']); ?>
+                        <?php endif; ?>
                         <?php if (trim((string) $service['title']) !== '') : ?>
                             <h3 class="home-services__title"><?php echo esc_html($service['title']); ?></h3>
                         <?php endif; ?>

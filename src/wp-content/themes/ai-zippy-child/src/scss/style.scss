@@ -22,8 +22,8 @@
   --az-section-y-padding-mobile: clamp(54px, 13vw, 88px);
   --az-section-gap: clamp(28px, 4vw, 72px);
 
-  --az-heading-font: var(--wp--preset--font-family--poppins, "Poppins", sans-serif);
-  --az-body-font: var(--wp--preset--font-family--dm-sans, "DM Sans", sans-serif);
+  --az-heading-font: var(--wp--preset--font-family--outfit, "Outfit", sans-serif);
+  --az-body-font: var(--wp--preset--font-family--outfit, "Outfit", sans-serif);
   --az-heading-xl: clamp(46px, 6vw, 112px);
   --az-heading-lg: clamp(38px, 4.4vw, 82px);
   --az-heading-md: clamp(30px, 3vw, 54px);
@@ -247,6 +247,12 @@ a.added_to_cart {
 
   .az-button {
     white-space: normal;
+  }
+
+  .az-button--medium {
+    padding: 12px 24px !important;
+    min-height: auto !important;
+    min-width: auto !important;
   }
 }
 

@@ -16,6 +16,9 @@ import { ServiceIcon, iconOptions } from "./icons.js";
 
 const defaultService = {
 	icon: "megaphone",
+	iconImageId: 0,
+	iconImageUrl: "",
+	iconImageAlt: "",
 	title: "New service",
 	description: "Describe this service.",
 };
@@ -29,6 +32,11 @@ export default function Edit({ attributes, setAttributes }) {
 		style: {
 			...getSectionStyle(attributes),
 			"--home-services-image-radius": `${attributes.imageRadius ?? 12}px`,
+			"--home-services-image-width": `${attributes.imageWidth ?? 100}%`,
+			"--home-services-image-aspect-ratio": attributes.imageAspectRatio || "1 / 1.5",
+			"--home-services-image-fit": attributes.imageObjectFit || "cover",
+			"--home-services-image-position": attributes.imageObjectPosition || "center center",
+			"--home-services-image-align": attributes.imageAlignment || "center",
 			"--home-services-content-gap": `${attributes.contentGap ?? 66}px`,
 			"--home-services-item-gap": `${attributes.itemGap ?? 48}px`,
 		},
@@ -55,13 +63,83 @@ export default function Edit({ attributes, setAttributes }) {
 						/>
 					</MediaUploadCheck>
 					<RangeControl label="Image radius" value={attributes.imageRadius} min={0} max={40} step={1} onChange={(imageRadius) => setAttributes({ imageRadius })} />
+					<RangeControl label="Image desktop width" value={attributes.imageWidth ?? 100} min={45} max={100} step={1} onChange={(imageWidth) => setAttributes({ imageWidth })} />
+					<SelectControl
+						label="Image aspect ratio"
+						value={attributes.imageAspectRatio || "1 / 1.5"}
+						options={[
+							{ label: "Tall", value: "1 / 1.5" },
+							{ label: "Portrait", value: "4 / 5" },
+							{ label: "Square", value: "1 / 1" },
+							{ label: "Wide", value: "16 / 11" },
+							{ label: "Classic portrait", value: "3 / 4" },
+						]}
+						onChange={(imageAspectRatio) => setAttributes({ imageAspectRatio })}
+					/>
+					<SelectControl
+						label="Image fit"
+						value={attributes.imageObjectFit || "cover"}
+						options={[
+							{ label: "Cover", value: "cover" },
+							{ label: "Contain", value: "contain" },
+						]}
+						onChange={(imageObjectFit) => setAttributes({ imageObjectFit })}
+					/>
+					<SelectControl
+						label="Image position"
+						value={attributes.imageObjectPosition || "center center"}
+						options={[
+							{ label: "Center", value: "center center" },
+							{ label: "Top", value: "center top" },
+							{ label: "Bottom", value: "center bottom" },
+							{ label: "Left", value: "left center" },
+							{ label: "Right", value: "right center" },
+						]}
+						onChange={(imageObjectPosition) => setAttributes({ imageObjectPosition })}
+					/>
+					<SelectControl
+						label="Image alignment"
+						value={attributes.imageAlignment || "center"}
+						options={[
+							{ label: "Left", value: "start" },
+							{ label: "Center", value: "center" },
+							{ label: "Right", value: "end" },
+						]}
+						onChange={(imageAlignment) => setAttributes({ imageAlignment })}
+					/>
 					<RangeControl label="Column gap" value={attributes.contentGap} min={24} max={140} step={2} onChange={(contentGap) => setAttributes({ contentGap })} />
 					<RangeControl label="Item gap" value={attributes.itemGap} min={20} max={90} step={2} onChange={(itemGap) => setAttributes({ itemGap })} />
 				</PanelBody>
 				<PanelBody title="Services" initialOpen={true}>
 					{services.map((service, index) => (
 						<div className="home-services-editor__item" key={index}>
-							<SelectControl label="Icon" value={service.icon} options={iconOptions} onChange={(icon) => updateService(index, { icon })} />
+							<SelectControl label="Fallback icon" value={service.icon} options={iconOptions} onChange={(icon) => updateService(index, { icon })} />
+							<MediaUploadCheck>
+								<MediaUpload
+									allowedTypes={["image"]}
+									value={service.iconImageId}
+									onSelect={(media) => updateService(index, {
+										iconImageId: media.id,
+										iconImageUrl: media.url,
+										iconImageAlt: media.alt || media.title || "",
+									})}
+									render={({ open }) => (
+										<div className="home-services-editor__icon-media">
+											{service.iconImageUrl ? <img src={service.iconImageUrl} alt="" /> : <span>No custom icon selected</span>}
+											<Button variant="secondary" onClick={open}>{service.iconImageUrl ? "Replace Icon" : "Select Icon"}</Button>
+											{service.iconImageUrl ? (
+												<Button
+													variant="link"
+													isDestructive
+													onClick={() => updateService(index, { iconImageId: 0, iconImageUrl: "", iconImageAlt: "" })}
+												>
+													Remove Icon
+												</Button>
+											) : null}
+										</div>
+									)}
+								/>
+							</MediaUploadCheck>
 							<TextControl label="Title" value={service.title} onChange={(title) => updateService(index, { title })} />
 							<TextControl label="Description" value={service.description} onChange={(description) => updateService(index, { description })} />
 							<Button variant="link" isDestructive disabled={services.length <= 1} onClick={() => setServices(services.filter((_, serviceIndex) => serviceIndex !== index))}>Remove</Button>
@@ -87,7 +165,11 @@ export default function Edit({ attributes, setAttributes }) {
 						<div className="home-services__list">
 							{services.map((service, index) => (
 								<div className="home-services__item" key={index}>
-									<ServiceIcon name={service.icon} />
+									{service.iconImageUrl ? (
+										<img className="home-services__icon-image" src={service.iconImageUrl} alt="" />
+									) : (
+										<ServiceIcon name={service.icon} />
+									)}
 									<RichText tagName="h3" className="home-services__title" value={service.title} allowedFormats={[]} onChange={(title) => updateService(index, { title })} />
 									<RichText tagName="p" className="home-services__description" value={service.description} allowedFormats={[]} onChange={(description) => updateService(index, { description })} />
 								</div>

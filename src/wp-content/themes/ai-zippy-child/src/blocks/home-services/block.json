@@ -37,22 +37,36 @@
 		"imageId": { "type": "number", "default": 0 },
 		"imageUrl": { "type": "string", "default": "" },
 		"imageAlt": { "type": "string", "default": "" },
+		"imageWidth": { "type": "number", "default": 100 },
+		"imageAspectRatio": { "type": "string", "default": "1 / 1.5" },
+		"imageObjectFit": { "type": "string", "default": "cover" },
+		"imageObjectPosition": { "type": "string", "default": "center center" },
+		"imageAlignment": { "type": "string", "default": "center" },
 		"heading": { "type": "string", "default": "Our Services" },
 		"services": {
 			"type": "array",
 			"default": [
 				{
 					"icon": "megaphone",
+					"iconImageId": 0,
+					"iconImageUrl": "",
+					"iconImageAlt": "",
 					"title": "Digital marketing",
 					"description": "Build your brand, reach the right audience, and turn attention into action with our end-to-end digital marketing expertise."
 				},
 				{
 					"icon": "globe",
+					"iconImageId": 0,
+					"iconImageUrl": "",
+					"iconImageAlt": "",
 					"title": "Website",
 					"description": "We design high-converting, mobile-friendly websites that turn visitors into paying customers."
 				},
 				{
 					"icon": "bulb",
+					"iconImageId": 0,
+					"iconImageUrl": "",
+					"iconImageAlt": "",
 					"title": "Creative services",
 					"description": "We craft compelling ideas into visuals and campaigns that elevate your brand."
 				}
