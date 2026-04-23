@@ -1,0 +1,130 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "ai-zippy-child/projects-gallery",
+  "version": "1.0.0",
+  "title": "Projects Gallery",
+  "category": "ai-zippy-page",
+  "icon": "format-gallery",
+  "description": "Tabbed project gallery for images and videos.",
+  "supports": {
+    "html": false,
+    "align": [
+      "wide",
+      "full"
+    ]
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    },
+    "layout": {
+      "type": "string",
+      "default": "boxed"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#000000"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#ffffff"
+    },
+    "paddingTop": {
+      "type": "number",
+      "default": 72
+    },
+    "paddingRight": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingBottom": {
+      "type": "number",
+      "default": 110
+    },
+    "paddingLeft": {
+      "type": "number",
+      "default": 0
+    },
+    "marginTop": {
+      "type": "number",
+      "default": 0
+    },
+    "marginBottom": {
+      "type": "number",
+      "default": 0
+    },
+    "paddingTopTablet": {
+      "type": "number"
+    },
+    "paddingRightTablet": {
+      "type": "number"
+    },
+    "paddingBottomTablet": {
+      "type": "number"
+    },
+    "paddingLeftTablet": {
+      "type": "number"
+    },
+    "marginTopTablet": {
+      "type": "number"
+    },
+    "marginBottomTablet": {
+      "type": "number"
+    },
+    "paddingTopMobile": {
+      "type": "number"
+    },
+    "paddingRightMobile": {
+      "type": "number"
+    },
+    "paddingBottomMobile": {
+      "type": "number"
+    },
+    "paddingLeftMobile": {
+      "type": "number"
+    },
+    "marginTopMobile": {
+      "type": "number"
+    },
+    "marginBottomMobile": {
+      "type": "number"
+    },
+    "heading": {
+      "type": "string",
+      "default": "Our Projects"
+    },
+    "tabs": {
+      "type": "array",
+      "default": [
+        {
+          "label": "Videos",
+          "items": []
+        },
+        {
+          "label": "Graphic Ads",
+          "items": []
+        }
+      ]
+    },
+    "columns": {
+      "type": "number",
+      "default": 4
+    },
+    "gap": {
+      "type": "number",
+      "default": 20
+    },
+    "itemRadius": {
+      "type": "number",
+      "default": 0
+    }
+  },
+  "textdomain": "ai-zippy-child",
+  "editorScript": "file:./index.js",
+  "viewScript": "file:./view.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php"
+}

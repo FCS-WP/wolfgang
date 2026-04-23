@@ -21,6 +21,9 @@ $attrs = wp_parse_args($attributes ?? [], [
     'paddingLeft' => null,
     'marginTop' => 0,
     'marginBottom' => 0,
+    'isSticky' => false,
+    'stickyTop' => 0,
+    'stickyZIndex' => 900,
 ]);
 
 $menu_items = [];
@@ -66,6 +69,8 @@ $wrapper_style_values = [
     '--site-header-padding-bottom' => absint($attrs['paddingBottom']) . 'px',
     '--site-header-margin-top' => absint($attrs['marginTop']) . 'px',
     '--site-header-margin-bottom' => absint($attrs['marginBottom']) . 'px',
+    '--site-header-sticky-top' => absint($attrs['stickyTop']) . 'px',
+    '--site-header-sticky-z-index' => absint($attrs['stickyZIndex']),
 ];
 
 if (isset($attrs['paddingRight']) && $attrs['paddingRight'] !== '') {
@@ -82,7 +87,7 @@ foreach ($wrapper_style_values as $property => $value) {
 }
 
 $wrapper_attributes = get_block_wrapper_attributes([
-    'class' => 'site-header',
+    'class' => 'site-header' . (!empty($attrs['isSticky']) ? ' site-header--sticky' : ''),
     'style' => $wrapper_style,
 ]);
 ?>

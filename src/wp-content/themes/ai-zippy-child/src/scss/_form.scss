@@ -212,6 +212,9 @@ $fs-color-success: #45b69c;
         flex-basis: 100%;
         max-width: 100%;
     }
+    label {
+        color: var(--az-button-bg);
+    }
 }
 
 .zippy-form__checkbox-wrap {
@@ -239,4 +242,21 @@ $fs-color-success: #45b69c;
 }
 .zippy-field-error {
     color: #c62828;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #000000 inset !important; /* your color */
+  -webkit-text-fill-color: #ffffff !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+select {
+    option {
+        background-color: #000000;
+        &:hover {
+            background-color: #35d36b;
+        }
+    }
 }

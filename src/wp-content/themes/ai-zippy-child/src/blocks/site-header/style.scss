@@ -10,6 +10,12 @@
   padding: var(--site-header-padding-top, 26px) var(--site-header-padding-right, var(--az-section-x-padding, clamp(24px, 7vw, 96px))) var(--site-header-padding-bottom, 26px) var(--site-header-padding-left, var(--az-section-x-padding, clamp(24px, 7vw, 96px)));
   width: 100%;
 
+  &.site-header--sticky {
+    position: sticky;
+    top: var(--site-header-sticky-top, 0);
+    z-index: var(--site-header-sticky-z-index, 900);
+  }
+
   .site-header__inner {
     align-items: center;
     box-sizing: border-box;
@@ -74,7 +80,7 @@
   .site-header__nav a,
   .site-header__nav span {
     color: var(--site-header-lime);
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0;
     line-height: 1.1;
@@ -203,8 +209,8 @@
   .site-header__drawer-nav a,
   .site-header__drawer-nav span {
     color: #fff;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: 20px;
+    font-weight: 500px;
     line-height: 1.1;
     text-decoration: none;
   }

@@ -1,5 +1,5 @@
 import { InspectorControls, MediaUpload, MediaUploadCheck, URLInputButton, useBlockProps } from "@wordpress/block-editor";
-import { Button, PanelBody, RangeControl, SelectControl, TextControl } from "@wordpress/components";
+import { Button, PanelBody, RangeControl, SelectControl, TextControl, ToggleControl } from "@wordpress/components";
 import { useEffect, useState } from "@wordpress/element";
 import apiFetch from "@wordpress/api-fetch";
 
@@ -13,7 +13,7 @@ export default function Edit({ attributes, setAttributes }) {
 		"--site-header-logo-height": `${attributes.logoHeight || 52}px`,
 	};
 	const blockProps = useBlockProps({
-		className: "site-header",
+		className: `site-header${attributes.isSticky ? " site-header--sticky" : ""}`,
 		style: {
 			"--site-header-padding-top": `${attributes.paddingTop ?? 26}px`,
 			"--site-header-padding-right": attributes.paddingRight === undefined ? undefined : `${attributes.paddingRight}px`,
@@ -21,6 +21,8 @@ export default function Edit({ attributes, setAttributes }) {
 			"--site-header-padding-left": attributes.paddingLeft === undefined ? undefined : `${attributes.paddingLeft}px`,
 			"--site-header-margin-top": `${attributes.marginTop ?? 0}px`,
 			"--site-header-margin-bottom": `${attributes.marginBottom ?? 0}px`,
+			"--site-header-sticky-top": `${attributes.stickyTop ?? 0}px`,
+			"--site-header-sticky-z-index": attributes.stickyZIndex ?? 900,
 		},
 	});
 
@@ -98,6 +100,29 @@ export default function Edit({ attributes, setAttributes }) {
 							onChange={(value) => setAttributes({ [key]: value })}
 						/>
 					))}
+				</PanelBody>
+				<PanelBody title="Sticky Header" initialOpen={false}>
+					<ToggleControl
+						label="Enable sticky header"
+						checked={Boolean(attributes.isSticky)}
+						onChange={(isSticky) => setAttributes({ isSticky })}
+					/>
+					<RangeControl
+						label="Sticky top offset"
+						value={attributes.stickyTop}
+						min={0}
+						max={160}
+						step={1}
+						onChange={(stickyTop) => setAttributes({ stickyTop })}
+					/>
+					<RangeControl
+						label="Sticky z-index"
+						value={attributes.stickyZIndex}
+						min={1}
+						max={9999}
+						step={1}
+						onChange={(stickyZIndex) => setAttributes({ stickyZIndex })}
+					/>
 				</PanelBody>
 				<PanelBody title="Fallback Links" initialOpen={false}>
 					{fallbackLinks.map((link, index) => (

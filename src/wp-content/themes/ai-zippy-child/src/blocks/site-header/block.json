@@ -35,7 +35,10 @@
 		"paddingBottom": { "type": "number", "default": 26 },
 		"paddingLeft": { "type": "number" },
 		"marginTop": { "type": "number", "default": 0 },
-		"marginBottom": { "type": "number", "default": 0 }
+		"marginBottom": { "type": "number", "default": 0 },
+		"isSticky": { "type": "boolean", "default": false },
+		"stickyTop": { "type": "number", "default": 0 },
+		"stickyZIndex": { "type": "number", "default": 900 }
 	},
 	"textdomain": "ai-zippy-child",
 	"editorScript": "file:./index.js",
