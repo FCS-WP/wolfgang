@@ -57,7 +57,7 @@
 	text-align: center;
 }
 
-.our-story-intro__card svg,
+.our-story-intro__icon-svg,
 .our-story-intro__icon {
 	display: block;
 	height: 58px;
@@ -67,12 +67,35 @@
 	width: 58px;
 }
 
-.our-story-intro__card svg {
+.our-story-intro__icon-svg svg {
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+
+.our-story-intro__icon-svg--default svg {
 	fill: none;
-	stroke: var(--our-story-card-accent-end, #c8ff9a);
+	stroke: var(--our-story-card-icon-color, var(--our-story-card-accent-end, #c8ff9a));
 	stroke-linecap: round;
 	stroke-linejoin: round;
 	stroke-width: 2.2;
+}
+
+.our-story-intro__icon-svg--custom {
+	color: var(--our-story-card-icon-color, var(--our-story-card-accent-end, #c8ff9a));
+}
+
+.our-story-intro__icon-svg--custom svg * {
+	fill: currentColor;
+	stroke: currentColor;
+}
+
+.our-story-intro__icon-svg--custom svg [fill="none"] {
+	fill: none;
+}
+
+.our-story-intro__icon-svg--custom svg [stroke="none"] {
+	stroke: none;
 }
 
 .our-story-intro__icon {
@@ -134,7 +157,7 @@
 		padding: 30px 24px;
 	}
 
-	.our-story-intro__card svg,
+	.our-story-intro__icon-svg,
 	.our-story-intro__icon {
 		height: 48px;
 		right: 22px;

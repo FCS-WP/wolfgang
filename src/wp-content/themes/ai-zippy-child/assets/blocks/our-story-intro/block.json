@@ -2,7 +2,7 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "ai-zippy-child/our-story-intro",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "title": "Our Story Intro",
   "category": "ai-zippy-page",
   "icon": "book",
@@ -131,6 +131,8 @@
           "iconId": 0,
           "iconUrl": "",
           "iconAlt": "",
+          "customIconSvg": "",
+          "iconColor": "",
           "title": "Vision",
           "description": ""
         },
@@ -139,6 +141,8 @@
           "iconId": 0,
           "iconUrl": "",
           "iconAlt": "",
+          "customIconSvg": "",
+          "iconColor": "",
           "title": "Mission",
           "description": ""
         }

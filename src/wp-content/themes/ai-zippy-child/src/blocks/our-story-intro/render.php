@@ -7,6 +7,8 @@ $default_cards = [
         'iconId' => 0,
         'iconUrl' => '',
         'iconAlt' => '',
+        'customIconSvg' => '',
+        'iconColor' => '',
         'title' => 'Vision',
         'description' => '',
     ],
@@ -15,6 +17,8 @@ $default_cards = [
         'iconId' => 0,
         'iconUrl' => '',
         'iconAlt' => '',
+        'customIconSvg' => '',
+        'iconColor' => '',
         'title' => 'Mission',
         'description' => '',
     ],
@@ -92,6 +96,79 @@ $wrapper_attributes = get_block_wrapper_attributes([
     'style' => $style,
 ]);
 
+$sanitize_svg = static function (string $svg): string {
+    $allowed_tags = [
+        'svg' => [
+            'xmlns' => true,
+            'viewbox' => true,
+            'viewBox' => true,
+            'width' => true,
+            'height' => true,
+            'fill' => true,
+            'stroke' => true,
+            'stroke-width' => true,
+            'stroke-linecap' => true,
+            'stroke-linejoin' => true,
+            'class' => true,
+            'style' => true,
+            'role' => true,
+            'aria-hidden' => true,
+            'focusable' => true,
+        ],
+        'g' => ['fill' => true, 'stroke' => true, 'stroke-width' => true, 'stroke-linecap' => true, 'stroke-linejoin' => true, 'transform' => true, 'class' => true],
+        'path' => ['d' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true, 'stroke-linecap' => true, 'stroke-linejoin' => true, 'transform' => true, 'class' => true],
+        'circle' => ['cx' => true, 'cy' => true, 'r' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true, 'class' => true],
+        'ellipse' => ['cx' => true, 'cy' => true, 'rx' => true, 'ry' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true, 'class' => true],
+        'rect' => ['x' => true, 'y' => true, 'width' => true, 'height' => true, 'rx' => true, 'ry' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true, 'class' => true],
+        'line' => ['x1' => true, 'y1' => true, 'x2' => true, 'y2' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true, 'stroke-linecap' => true, 'class' => true],
+        'polyline' => ['points' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true, 'stroke-linecap' => true, 'stroke-linejoin' => true, 'class' => true],
+        'polygon' => ['points' => true, 'fill' => true, 'stroke' => true, 'stroke-width' => true, 'stroke-linecap' => true, 'stroke-linejoin' => true, 'class' => true],
+    ];
+
+    return wp_kses($svg, $allowed_tags);
+};
+
+$load_svg_from_media = static function (array $card) use ($sanitize_svg): string {
+    $icon_id = isset($card['iconId']) ? absint($card['iconId']) : 0;
+    $icon_url = trim((string) ($card['iconUrl'] ?? ''));
+
+    if ($icon_url === '' || !preg_match('/\.svg(?:\?.*)?$/i', $icon_url)) {
+        return '';
+    }
+
+    $file_path = '';
+
+    if ($icon_id > 0) {
+        $attached_file = get_attached_file($icon_id);
+        if (is_string($attached_file) && $attached_file !== '') {
+            $file_path = $attached_file;
+        }
+    }
+
+    if ($file_path === '') {
+        $uploads = wp_get_upload_dir();
+        if (!empty($uploads['baseurl']) && !empty($uploads['basedir']) && str_starts_with($icon_url, $uploads['baseurl'])) {
+            $relative_path = ltrim(substr($icon_url, strlen($uploads['baseurl'])), '/');
+            $candidate = trailingslashit($uploads['basedir']) . $relative_path;
+            if (is_string($candidate) && $candidate !== '') {
+                $file_path = $candidate;
+            }
+        }
+    }
+
+    if ($file_path === '' || !file_exists($file_path) || !is_readable($file_path)) {
+        return '';
+    }
+
+    $svg = file_get_contents($file_path);
+
+    if (!is_string($svg) || trim($svg) === '') {
+        return '';
+    }
+
+    return $sanitize_svg($svg);
+};
+
 $render_icon = static function (string $icon): void {
     if ($icon === 'mission') {
         echo '<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false"><circle cx="29" cy="34" r="18"/><circle cx="29" cy="34" r="10"/><circle cx="29" cy="34" r="3"/><path d="M42 21l10-10M45 11h7v7M38 25l14-14M10 34c0-11 8-20 19-20M29 54c-11 0-19-9-19-20"/></svg>';
@@ -119,15 +196,27 @@ $render_icon = static function (string $icon): void {
                     'iconId' => 0,
                     'iconUrl' => '',
                     'iconAlt' => '',
+                    'customIconSvg' => '',
+                    'iconColor' => '',
                     'title' => '',
                     'description' => '',
                 ]);
+                $card_icon_color = sanitize_hex_color((string) $card['iconColor']);
+                $card_icon_style = $card_icon_color ? '--our-story-card-icon-color:' . esc_attr($card_icon_color) . ';' : '';
+                $custom_icon_svg = trim((string) $card['customIconSvg']);
+                if ($custom_icon_svg === '') {
+                    $custom_icon_svg = $load_svg_from_media($card);
+                }
                 ?>
                 <article class="our-story-intro__card">
-                    <?php if (trim((string) $card['iconUrl']) !== '') : ?>
+                    <?php if ($custom_icon_svg !== '') : ?>
+                        <span class="our-story-intro__icon-svg our-story-intro__icon-svg--custom" style="<?php echo esc_attr($card_icon_style); ?>"><?php echo $sanitize_svg($custom_icon_svg); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+                    <?php elseif (trim((string) $card['iconUrl']) !== '') : ?>
                         <img class="our-story-intro__icon" src="<?php echo esc_url($card['iconUrl']); ?>" alt="<?php echo esc_attr($card['iconAlt']); ?>" loading="lazy" decoding="async" />
                     <?php else : ?>
-                        <?php $render_icon((string) $card['icon']); ?>
+                        <span class="our-story-intro__icon-svg our-story-intro__icon-svg--default" style="<?php echo esc_attr($card_icon_style); ?>">
+                            <?php $render_icon((string) $card['icon']); ?>
+                        </span>
                     <?php endif; ?>
                     <?php if (trim((string) $card['title']) !== '') : ?>
                         <h3 class="our-story-intro__card-title"><?php echo esc_html($card['title']); ?></h3>
