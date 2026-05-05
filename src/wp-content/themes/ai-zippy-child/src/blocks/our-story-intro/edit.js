@@ -23,11 +23,31 @@ const defaultCard = {
 	iconId: 0,
 	iconUrl: "",
 	iconAlt: "",
+	customIconSvg: "",
+	iconColor: "",
 	title: "New Card",
 	description: "",
 };
 
 const asCards = (cards) => (Array.isArray(cards) && cards.length ? cards : []).map((card) => ({ ...defaultCard, ...card }));
+
+const isSvgAsset = (media = {}) => media?.mime === "image/svg+xml" || /\.svg(?:\?|$)/i.test(media?.url || "");
+
+const fetchSvgMarkup = async (url) => {
+	if (!url) {
+		return "";
+	}
+
+	const response = await window.fetch(url, {
+		credentials: "same-origin",
+	});
+
+	if (!response.ok) {
+		throw new Error("Unable to load SVG");
+	}
+
+	return response.text();
+};
 
 function StoryIcon({ name = "vision" }) {
 	if (name === "mission") {
@@ -50,6 +70,28 @@ function StoryIcon({ name = "vision" }) {
 	);
 }
 
+function IconPreview({ card }) {
+	if (card.customIconSvg) {
+		return (
+			<span
+				className="our-story-intro-editor__icon-svg"
+				style={{ color: card.iconColor || undefined }}
+				dangerouslySetInnerHTML={{ __html: card.customIconSvg }}
+			/>
+		);
+	}
+
+	if (card.iconUrl) {
+		return <img src={card.iconUrl} alt="" />;
+	}
+
+	return (
+		<span className="our-story-intro-editor__icon-svg" style={{ color: card.iconColor || undefined }}>
+			<StoryIcon name={card.icon} />
+		</span>
+	);
+}
+
 export default function Edit({ attributes, setAttributes }) {
 	const [themePalette] = useSettings("color.palette");
 	const cards = asCards(attributes.cards);
@@ -68,6 +110,26 @@ export default function Edit({ attributes, setAttributes }) {
 
 	const setCards = (nextCards) => setAttributes({ cards: nextCards });
 	const updateCard = (index, patch) => setCards(cards.map((card, cardIndex) => (cardIndex === index ? { ...card, ...patch } : card)));
+	const updateCardIconFromMedia = async (index, media) => {
+		const basePatch = {
+			iconId: media?.id || 0,
+			iconUrl: media?.url || "",
+			iconAlt: media?.alt || media?.title || "",
+		};
+
+		if (isSvgAsset(media)) {
+			try {
+				const customIconSvg = await fetchSvgMarkup(media.url);
+				updateCard(index, { ...basePatch, customIconSvg });
+				return;
+			} catch (error) {
+				updateCard(index, { ...basePatch, customIconSvg: "" });
+				return;
+			}
+		}
+
+		updateCard(index, { ...basePatch, customIconSvg: "" });
+	};
 	const moveCard = (index, direction) => {
 		const nextIndex = index + direction;
 		if (nextIndex < 0 || nextIndex >= cards.length) {
@@ -106,22 +168,29 @@ export default function Edit({ attributes, setAttributes }) {
 								<MediaUpload
 									allowedTypes={["image"]}
 									value={card.iconId}
-									onSelect={(media) => updateCard(index, {
-										iconId: media.id,
-										iconUrl: media.url,
-										iconAlt: media.alt || media.title || "",
-									})}
+									onSelect={(media) => updateCardIconFromMedia(index, media)}
 									render={({ open }) => (
 										<div className="our-story-intro-editor__icon">
-											{card.iconUrl ? <img src={card.iconUrl} alt="" /> : <StoryIcon name={card.icon} />}
-											<Button variant="secondary" onClick={open}>{card.iconUrl ? "Replace Icon" : "Upload Icon"}</Button>
+											<IconPreview card={card} />
+											<Button variant="secondary" onClick={open}>{card.iconUrl ? "Replace Icon" : "Choose Icon"}</Button>
 											{card.iconUrl ? (
-												<Button variant="link" isDestructive onClick={() => updateCard(index, { iconId: 0, iconUrl: "", iconAlt: "" })}>Remove</Button>
+												<Button variant="link" isDestructive onClick={() => updateCard(index, { iconId: 0, iconUrl: "", iconAlt: "", customIconSvg: "" })}>Remove</Button>
 											) : null}
 										</div>
 									)}
 								/>
 							</MediaUploadCheck>
+							{card.iconUrl && card.customIconSvg ? (
+								<p className="our-story-intro-editor__icon-note">SVG file selected from Media Library. Color control will apply to this icon.</p>
+							) : null}
+							<BaseControl label="Icon color">
+								<ColorPalette
+									colors={themePalette || []}
+									value={card.iconColor}
+									onChange={(iconColor) => updateCard(index, { iconColor: iconColor || "" })}
+									clearable
+								/>
+							</BaseControl>
 							<TextControl label="Icon alt text" value={card.iconAlt} onChange={(iconAlt) => updateCard(index, { iconAlt })} />
 							<TextControl label="Title" value={card.title} onChange={(title) => updateCard(index, { title })} />
 							<TextareaControl label="Description" rows={3} value={card.description} onChange={(description) => updateCard(index, { description })} />
@@ -145,7 +214,22 @@ export default function Edit({ attributes, setAttributes }) {
 					<div className="our-story-intro__cards">
 						{cards.map((card, index) => (
 							<article className="our-story-intro__card" key={index}>
-								{card.iconUrl ? <img className="our-story-intro__icon" src={card.iconUrl} alt="" /> : <StoryIcon name={card.icon} />}
+								{card.customIconSvg ? (
+									<span
+										className="our-story-intro__icon-svg our-story-intro__icon-svg--custom"
+										style={{ "--our-story-card-icon-color": card.iconColor || undefined }}
+										dangerouslySetInnerHTML={{ __html: card.customIconSvg }}
+									/>
+								) : card.iconUrl ? (
+									<img className="our-story-intro__icon" src={card.iconUrl} alt="" />
+								) : (
+									<span
+										className="our-story-intro__icon-svg our-story-intro__icon-svg--default"
+										style={{ "--our-story-card-icon-color": card.iconColor || undefined }}
+									>
+										<StoryIcon name={card.icon} />
+									</span>
+								)}
 								<RichText tagName="h3" className="our-story-intro__card-title" value={card.title} allowedFormats={[]} onChange={(title) => updateCard(index, { title })} />
 								<RichText tagName="p" className="our-story-intro__card-description" value={card.description} allowedFormats={["core/bold", "core/italic"]} onChange={(description) => updateCard(index, { description })} />
 							</article>
