@@ -79,6 +79,14 @@ export default function Edit({ attributes, setAttributes }) {
 			<section {...blockProps}>
 				<div className="our-culture__inner az-section__inner">
 					<RichText tagName="h2" className="our-culture__heading" value={attributes.heading} allowedFormats={[]} onChange={(heading) => setAttributes({ heading })} />
+					<RichText
+						tagName="p"
+						className="our-culture__description"
+						value={attributes.description}
+						allowedFormats={["core/bold", "core/italic", "core/link"]}
+						onChange={(description) => setAttributes({ description })}
+						placeholder="Add description"
+					/>
 					<div className="our-culture__gallery" aria-label="Culture gallery">
 						{images.length ? images.map((image, index) => (
 							<button
@@ -87,6 +95,7 @@ export default function Edit({ attributes, setAttributes }) {
 								onClick={() => setActiveIndex(index)}
 								type="button"
 							>
+								<div className="our-culture__overlay" />
 								<img src={image.url} alt="" />
 							</button>
 						)) : <div className="our-culture__placeholder">Add culture images</div>}

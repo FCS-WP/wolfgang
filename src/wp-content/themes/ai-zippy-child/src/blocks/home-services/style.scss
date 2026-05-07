@@ -8,6 +8,7 @@
 	display: grid;
 	gap: var(--home-services-content-gap, 66px);
 	grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+	max-width: 1000px !important;
 }
 
 .home-services__media {
@@ -16,6 +17,7 @@
 	justify-self: var(--home-services-image-align, center);
 	overflow: hidden;
 	width: var(--home-services-image-width, 100%);
+	height: 100%;
 }
 
 .home-services__media img,
@@ -37,7 +39,7 @@
 .home-services__heading {
 	color: inherit;
 	font-family: var(--az-heading-font, inherit);
-	font-size: clamp(30px, 3.2vw, 46px);
+	font-size: clamp(40px, 4.2vw, 64px);
 	font-weight: 800;
 	letter-spacing: 0;
 	line-height: 1;
@@ -72,7 +74,7 @@
 .home-services__title {
 	color: inherit;
 	font-family: var(--az-heading-font, inherit);
-	font-size: clamp(20px, 1.45vw, 24px);
+	font-size: clamp(26px, 2.2vw, 32px);
 	font-weight: 800;
 	letter-spacing: 0;
 	line-height: 1.1;
@@ -82,17 +84,23 @@
 .home-services__description {
 	color: inherit;
 	font-size: 1rem;
-	font-weight: 500;
+	font-weight: 400;
 	letter-spacing: 0;
 	line-height: 1.45;
 	margin: 0;
-	max-width: 520px;
+	max-width: 390px;
 }
 
 .home-services__button {
-	--az-button-bg: #000;
-	--az-button-color: #fff;
-	margin-top: 56px;
+	border-radius: 999px;
+    padding: 12px 30px;
+    background: #000;
+    color: #fff;
+    font-size: 16px !important;
+    font-weight: 400 !important;
+    margin-top: 40px;
+	display: inline-block;
+	text-decoration: none;
 }
 
 @media (max-width: 900px) {

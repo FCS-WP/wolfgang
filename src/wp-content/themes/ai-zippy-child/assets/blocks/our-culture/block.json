@@ -95,6 +95,10 @@
       "type": "string",
       "default": "Our Culture"
     },
+    "description": {
+      "type": "string",
+      "default": ""
+    },
     "accentStartColor": {
       "type": "string",
       "default": "#0167ff"

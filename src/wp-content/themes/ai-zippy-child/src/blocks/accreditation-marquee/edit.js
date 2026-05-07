@@ -1,6 +1,5 @@
-import { RichText, useBlockProps } from "@wordpress/block-editor";
-import { PanelBody, RangeControl, TextControl } from "@wordpress/components";
-import { InspectorControls } from "@wordpress/block-editor";
+import { InspectorControls, MediaUpload, MediaUploadCheck, RichText, useBlockProps } from "@wordpress/block-editor";
+import { Button, PanelBody, RangeControl, TextControl } from "@wordpress/components";
 import {
 	SectionControls,
 	getSectionClassName,
@@ -29,10 +28,38 @@ export default function Edit({ attributes, setAttributes }) {
 			<InspectorControls>
 				<PanelBody title="Marquee" initialOpen={true}>
 					<TextControl
-						label="Mark"
+						label="Fallback mark"
 						value={attributes.mark}
 						onChange={(mark) => setAttributes({ mark })}
 					/>
+					<MediaUploadCheck>
+						<MediaUpload
+							allowedTypes={["image"]}
+							value={attributes.markImageId}
+							onSelect={(media) => setAttributes({
+								markImageId: media.id,
+								markImageUrl: media.url,
+								markImageAlt: media.alt || media.title || "",
+							})}
+							render={({ open }) => (
+								<div className="accreditation-marquee-editor__media">
+									{attributes.markImageUrl ? <img src={attributes.markImageUrl} alt="" /> : <div>No custom icon selected</div>}
+									<Button variant="secondary" onClick={open}>
+										{attributes.markImageUrl ? "Replace Icon" : "Choose Icon"}
+									</Button>
+									{attributes.markImageUrl ? (
+										<Button
+											variant="link"
+											isDestructive
+											onClick={() => setAttributes({ markImageId: 0, markImageUrl: "", markImageAlt: "" })}
+										>
+											Remove Icon
+										</Button>
+									) : null}
+								</div>
+							)}
+						/>
+					</MediaUploadCheck>
 					<RangeControl
 						label="Repeat count"
 						value={attributes.repeatCount}
@@ -84,7 +111,11 @@ export default function Edit({ attributes, setAttributes }) {
 							<div className="accreditation-marquee__group">
 								{items.map((_, index) => (
 									<span className="accreditation-marquee__item" key={index}>
-										<span className="accreditation-marquee__mark" aria-hidden="true">{attributes.mark}</span>
+										{attributes.markImageUrl ? (
+											<img className="accreditation-marquee__mark-image" src={attributes.markImageUrl} alt="" aria-hidden="true" />
+										) : (
+											<span className="accreditation-marquee__mark" aria-hidden="true">{attributes.mark}</span>
+										)}
 										<RichText
 											tagName="span"
 											className="accreditation-marquee__text"
@@ -99,7 +130,11 @@ export default function Edit({ attributes, setAttributes }) {
 							<div className="accreditation-marquee__group" aria-hidden="true">
 								{items.map((_, index) => (
 									<span className="accreditation-marquee__item" key={index}>
-										<span className="accreditation-marquee__mark" aria-hidden="true">{attributes.mark}</span>
+										{attributes.markImageUrl ? (
+											<img className="accreditation-marquee__mark-image" src={attributes.markImageUrl} alt="" aria-hidden="true" />
+										) : (
+											<span className="accreditation-marquee__mark" aria-hidden="true">{attributes.mark}</span>
+										)}
 										<span className="accreditation-marquee__text">{attributes.text}</span>
 									</span>
 								))}
