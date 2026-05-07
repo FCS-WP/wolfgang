@@ -14,7 +14,7 @@
 	font-weight: 800;
 	letter-spacing: 0;
 	line-height: 1;
-	margin: 0 auto 70px;
+	margin: 0 auto 20px;
 	text-align: center;
 	width: fit-content;
 	-webkit-background-clip: text;
@@ -22,8 +22,8 @@
 }
 
 .our-culture__description {
-	color: inherit;
-	font-size: 1rem;
+	color: white;
+	font-size: 20px;
 	font-weight: 500;
 	line-height: 1.55;
 	margin: 0 auto 38px;
@@ -43,9 +43,9 @@
 	align-items: center;
 	display: block;
 	margin-inline: calc((100vw - min(100vw, var(--az-section-max-width, 1180px))) / -2);
-	min-height: calc(var(--our-culture-image-height, 360px) + 200px);
+	min-height: calc(var(--our-culture-image-height, 360px) + 260px);
 	overflow: hidden;
-	padding: 62px 24px 30px;
+	padding: 50px 24px 72px;
 	position: relative;
 }
 
@@ -58,22 +58,22 @@
 	height: var(--our-culture-image-height, 360px);
 	left: 50%;
 	margin: 0;
-	opacity: 0;
+	opacity: var(--our-culture-item-opacity, 0);
 	padding: 0;
-	pointer-events: none;
+	pointer-events: auto;
 	position: absolute;
-	top: 62px;
-	transform: translateX(-50%) scale(0.72);
-	transition: opacity 320ms ease, transform 320ms ease, width 320ms ease, z-index 320ms ease;
-	width: min(250px, 19vw);
-	z-index: 0;
+	top: 50%;
+	transform: translate(-50%, -50%) translate(var(--our-culture-item-x, 0), var(--our-culture-item-y, 0)) scale(var(--our-culture-item-scale, 0.72));
+	transition: opacity 420ms ease, transform 420ms ease, width 420ms ease, z-index 420ms ease;
+	width: var(--our-culture-item-base-width, 180px);
+	z-index: var(--our-culture-item-z, 1);
 }
 
 .our-culture__overlay {
 	background: rgb(7 6 6 / 45%);
 	border-radius: 8px;
 	inset: 0;
-	opacity: 1;
+	opacity: var(--our-culture-item-overlay-opacity, 0.32);
 	pointer-events: none;
 	position: absolute;
 	transition: opacity 320ms ease;
@@ -82,61 +82,10 @@
 
 .our-culture__item.is-active {
 	opacity: 1;
-	pointer-events: auto;
-	transform: translateX(-50%) translatey(30%)  scale(1);
-	width: min(300px, 43vw);
-	z-index: 6;
 
 	.our-culture__overlay {
 		opacity: 0;
 	}
-}
-
-.our-culture__item.is-offset-minus-1,
-.our-culture__item.is-offset-plus-1,
-.our-culture__item.is-offset-minus-2,
-.our-culture__item.is-offset-plus-2,
-.our-culture__item.is-offset-plus-3 {
-	pointer-events: auto;
-}
-
-.our-culture__item.is-offset-minus-1 {
-	opacity: 0.9;
-	transform: translateX(calc(-50% - min(320px, 39vw))) translateY(30px) scale(0.86);
-	width: min(300px, 32vw);
-	z-index: 4;
-}
-
-.our-culture__item.is-offset-plus-1 {
-	opacity: 0.9;
-	transform: translateX(calc(-50% + min(320px, 40vw))) translateY(30px) scale(0.86);
-	width: min(300px, 32vw);
-	z-index: 4;
-}
-
-.our-culture__item.is-offset-minus-2 {
-	opacity: 0.72;
-	transform: translateX(calc(-50% - min(760px, 55vw))) translateY(-28px) scale(0.78);
-	width: min(260px, 20vw);
-	z-index: 3;
-}
-
-.our-culture__item.is-offset-plus-2 {
-	opacity: 0.38;
-	transform: translateX(calc(-50% - min(170px, 12vw))) translateY(-78px) scale(0.7);
-	width: min(260px, 19vw);
-	z-index: 1;
-}
-
-.our-culture__item.is-offset-plus-3 {
-	opacity: 0.42;
-	transform: translateX(calc(-50% + min(190px, 14vw))) translateY(-82px) scale(0.72);
-	width: min(260px, 19vw);
-	z-index: 1;
-}
-
-.our-culture__item.is-hidden {
-	transform: translateX(-50%) translateY(-70px) scale(0.52);
 }
 
 .our-culture__item:focus-visible {
@@ -180,8 +129,8 @@
 	}
 
 	.our-culture__gallery {
-		min-height: calc(var(--our-culture-image-height, 360px) * 0.78 + 48px);
-		padding-block: 40px 22px;
+		min-height: calc(var(--our-culture-image-height, 360px) * 0.78 + 140px);
+		padding-block: 46px 28px;
 	}
 
 	.our-culture__item,
@@ -191,31 +140,6 @@
 	}
 
 	.our-culture__item {
-		top: 40px;
-		width: min(180px, 42vw);
-	}
-
-	.our-culture__item.is-active {
-		transform: translateX(-50%) scale(1);
-		width: min(310px, 78vw);
-	}
-
-	.our-culture__item.is-offset-minus-1 {
-		transform: translateX(calc(-50% - 50vw)) translateY(-6px) scale(0.76);
-		width: min(210px, 52vw);
-	}
-
-	.our-culture__item.is-offset-plus-1 {
-		transform: translateX(calc(-50% + 50vw)) translateY(-6px) scale(0.76);
-		width: min(210px, 52vw);
-	}
-
-	.our-culture__item.is-offset-minus-2,
-	.our-culture__item.is-offset-plus-2,
-	.our-culture__item.is-offset-plus-3 {
-		opacity: 0.34;
-		transform: translateX(-50%) translateY(-44px) scale(0.58);
-		width: min(160px, 38vw);
-		z-index: 1;
+		top: 50%;
 	}
 }
