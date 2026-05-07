@@ -61,6 +61,6 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'our-people az-se
                 </article>
             <?php endforeach; ?>
         </div>
-        <?php if (trim((string) $attrs['ctaText']) !== '') : ?><div class="our-people__cta"><?php echo wp_kses_post(nl2br((string) $attrs['ctaText'])); ?></div><?php endif; ?>
+        <?php if (trim((string) $attrs['ctaText']) !== '') : ?><div class="our-people__cta"><?php echo wp_kses_post((string) $attrs['ctaText']); ?></div><?php endif; ?>
     </div>
 </section>

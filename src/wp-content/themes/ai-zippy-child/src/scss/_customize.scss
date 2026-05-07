@@ -4,3 +4,15 @@
 .m-0 {
     margin: 0 !important;
 }
+.banner-num {
+    font-size: clamp(44px, 4.7vw ,90px);
+    
+    @media (max-width: 728px) {
+        margin-top: 20px;
+    }
+
+    .small-title {
+        font-size: clamp(22px, 1.8vw, 27px);
+        font-weight: 500;
+    }
+}

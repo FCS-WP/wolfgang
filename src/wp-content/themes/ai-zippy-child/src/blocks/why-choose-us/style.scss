@@ -60,7 +60,7 @@
 .why-choose-us__title {
 	color: inherit;
 	font-family: var(--az-heading-font, inherit);
-	font-size: clamp(20px, 1.45vw, 24px);
+	font-size: clamp(24px, 2vw, 32px);
 	font-weight: 800;
 	letter-spacing: 0;
 	line-height: 1.1;
@@ -74,7 +74,7 @@
 	letter-spacing: 0;
 	line-height: 1.42;
 	margin: 0;
-	max-width: 350px;
+	max-width: 270px;
 }
 
 @media (max-width: 900px) {

@@ -25,6 +25,9 @@ $attrs = wp_parse_args($attributes ?? [], [
     'marginBottomMobile' => null,
     'text' => 'Productivity Solutions Grant Accredited',
     'mark' => '♛',
+    'markImageId' => 0,
+    'markImageUrl' => '',
+    'markImageAlt' => '',
     'repeatCount' => 6,
     'speed' => 28,
     'height' => 34,
@@ -40,6 +43,7 @@ $gap = min(max(absint($attrs['gap']), 12), 96);
 $font_size = min(max(absint($attrs['fontSize']), 12), 42);
 $text = trim((string) $attrs['text']);
 $mark = trim((string) $attrs['mark']);
+$mark_image_url = trim((string) $attrs['markImageUrl']);
 
 if ($text === '') {
     return;
@@ -89,11 +93,13 @@ $wrapper_attributes = get_block_wrapper_attributes([
     'style' => $style,
 ]);
 
-$render_group = static function () use ($repeat_count, $text, $mark): void {
+$render_group = static function () use ($repeat_count, $text, $mark, $mark_image_url, $mark_image_alt): void {
     for ($index = 0; $index < $repeat_count; $index++) {
         ?>
         <span class="accreditation-marquee__item">
-            <?php if ($mark !== '') : ?>
+            <?php if ($mark_image_url !== '') : ?>
+                <img class="accreditation-marquee__mark-image" src="<?php echo esc_url($mark_image_url); ?>" alt="" loading="lazy" decoding="async" aria-hidden="true" />
+            <?php elseif ($mark !== '') : ?>
                 <span class="accreditation-marquee__mark" aria-hidden="true"><?php echo esc_html($mark); ?></span>
             <?php endif; ?>
             <span class="accreditation-marquee__text"><?php echo esc_html($text); ?></span>

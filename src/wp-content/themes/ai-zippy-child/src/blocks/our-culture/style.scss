@@ -21,11 +21,29 @@
 	-webkit-text-fill-color: transparent;
 }
 
+.our-culture__description {
+	color: inherit;
+	font-size: 1rem;
+	font-weight: 500;
+	line-height: 1.55;
+	margin: 0 auto 38px;
+	max-width: 760px;
+	text-align: center;
+}
+
+.our-culture__description p {
+	margin: 0 0 16px;
+}
+
+.our-culture__description p:last-child {
+	margin-bottom: 0;
+}
+
 .our-culture__gallery {
 	align-items: center;
 	display: block;
 	margin-inline: calc((100vw - min(100vw, var(--az-section-max-width, 1180px))) / -2);
-	min-height: calc(var(--our-culture-image-height, 360px) + 92px);
+	min-height: calc(var(--our-culture-image-height, 360px) + 200px);
 	overflow: hidden;
 	padding: 62px 24px 30px;
 	position: relative;
@@ -51,12 +69,27 @@
 	z-index: 0;
 }
 
+.our-culture__overlay {
+	background: rgb(7 6 6 / 45%);
+	border-radius: 8px;
+	inset: 0;
+	opacity: 1;
+	pointer-events: none;
+	position: absolute;
+	transition: opacity 320ms ease;
+	z-index: 1;
+}
+
 .our-culture__item.is-active {
 	opacity: 1;
 	pointer-events: auto;
-	transform: translateX(-50%) scale(1);
-	width: min(560px, 43vw);
+	transform: translateX(-50%) translatey(30%)  scale(1);
+	width: min(300px, 43vw);
 	z-index: 6;
+
+	.our-culture__overlay {
+		opacity: 0;
+	}
 }
 
 .our-culture__item.is-offset-minus-1,
@@ -68,16 +101,16 @@
 }
 
 .our-culture__item.is-offset-minus-1 {
-	opacity: 0.78;
-	transform: translateX(calc(-50% - min(510px, 39vw))) translateY(-10px) scale(0.86);
-	width: min(420px, 32vw);
+	opacity: 0.9;
+	transform: translateX(calc(-50% - min(320px, 39vw))) translateY(30px) scale(0.86);
+	width: min(300px, 32vw);
 	z-index: 4;
 }
 
 .our-culture__item.is-offset-plus-1 {
 	opacity: 0.9;
-	transform: translateX(calc(-50% + min(520px, 40vw))) translateY(-18px) scale(0.88);
-	width: min(430px, 32vw);
+	transform: translateX(calc(-50% + min(320px, 40vw))) translateY(30px) scale(0.86);
+	width: min(300px, 32vw);
 	z-index: 4;
 }
 
@@ -121,6 +154,11 @@
 	width: 100%;
 }
 
+.our-culture__item img {
+	position: relative;
+	z-index: 0;
+}
+
 .our-culture__placeholder {
 	align-items: center;
 	background: rgba(255, 255, 255, 0.08);
@@ -135,6 +173,10 @@
 	.our-culture__heading {
 		font-size: clamp(30px, 10vw, 44px);
 		margin-bottom: 38px;
+	}
+
+	.our-culture__description {
+		margin-bottom: 28px;
 	}
 
 	.our-culture__gallery {

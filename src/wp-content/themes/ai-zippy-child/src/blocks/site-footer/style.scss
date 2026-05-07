@@ -58,12 +58,13 @@
 
   .site-footer__description {
     color: var(--site-footer-lime);
-    font-size: clamp(28px, 2.05vw, 42px);
-    font-weight: 600;
+    font-size: 33px;
+    font-weight: 700;
     letter-spacing: 0;
-    line-height: 1.18;
+    line-height: 1.2;
     margin-top: 20px;
-    max-width: 560px;
+    font-family: revert;
+    max-width: 400px;
   }
 
   .site-footer__nav {

@@ -12,6 +12,7 @@ $attrs = wp_parse_args($attributes ?? [], [
     'marginTop' => 0,
     'marginBottom' => 0,
     'heading' => 'Our Culture',
+    'description' => '',
     'accentStartColor' => '#0167ff',
     'accentEndColor' => '#c5fda2',
     'images' => [],
@@ -69,10 +70,12 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'our-culture az-s
 <section <?php echo $wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
     <div class="our-culture__inner az-section__inner">
         <?php if (trim((string) $attrs['heading']) !== '') : ?><h2 class="our-culture__heading"><?php echo esc_html($attrs['heading']); ?></h2><?php endif; ?>
+        <?php if (trim((string) $attrs['description']) !== '') : ?><div class="our-culture__description"><?php echo wp_kses_post(wpautop((string) $attrs['description'])); ?></div><?php endif; ?>
         <div class="our-culture__gallery" aria-label="<?php esc_attr_e('Culture gallery', 'ai-zippy-child'); ?>">
             <?php if ($images) : $active_index = (int) floor(count($images) / 2); $image_count = count($images); foreach ($images as $index => $image) : $image = wp_parse_args((array) $image, ['url' => '', 'alt' => '']); ?>
                 <?php if (trim((string) $image['url']) !== '') : ?>
                     <button class="<?php echo esc_attr($get_item_class($index, $active_index, $image_count)); ?>" type="button">
+                        <div class="our-culture__overlay"></div>
                         <img src="<?php echo esc_url($image['url']); ?>" alt="<?php echo esc_attr($image['alt']); ?>" loading="lazy" decoding="async">
                     </button>
                 <?php endif; ?>

@@ -74,7 +74,14 @@ export default function Edit({ attributes, setAttributes }) {
 							</article>
 						))}
 					</div>
-					<RichText tagName="div" multiline="br" className="our-people__cta" value={attributes.ctaText} allowedFormats={["core/bold", "core/italic"]} onChange={(ctaText) => setAttributes({ ctaText })} />
+					<RichText
+						tagName="p"
+						className="our-people__cta"
+						value={attributes.ctaText}
+						allowedFormats={["core/bold", "core/italic", "core/link"]}
+						onChange={(ctaText) => setAttributes({ ctaText })}
+						placeholder="Add CTA text"
+					/>
 				</div>
 			</section>
 		</>

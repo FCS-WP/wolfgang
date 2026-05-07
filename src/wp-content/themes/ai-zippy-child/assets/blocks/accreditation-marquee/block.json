@@ -99,6 +99,18 @@
       "type": "string",
       "default": "♛"
     },
+    "markImageId": {
+      "type": "number",
+      "default": 0
+    },
+    "markImageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "markImageAlt": {
+      "type": "string",
+      "default": ""
+    },
     "repeatCount": {
       "type": "number",
       "default": 6

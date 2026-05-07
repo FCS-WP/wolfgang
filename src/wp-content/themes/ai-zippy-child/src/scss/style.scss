@@ -79,6 +79,7 @@ iframe {
   margin: 0 auto;
   max-width: var(--az-section-content-width, var(--az-section-max-width));
   width: 100%;
+  padding: 0 20px;
 }
 
 .az-section--full .az-section__inner,
@@ -229,6 +230,11 @@ a.added_to_cart {
 @media (max-width: 1024px) {
   :root {
     --az-section-x-padding: clamp(22px, 5vw, 48px);
+  }
+
+  .az-section__inner,
+  .az-section-inner {
+    padding: 0;
   }
 
   .az-section {

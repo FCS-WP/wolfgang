@@ -169,11 +169,11 @@ $render_icon = static function (string $icon): void {
             </div>
             <?php if (trim((string) $attrs['buttonLabel']) !== '') : ?>
                 <?php if (trim((string) $attrs['buttonUrl']) !== '') : ?>
-                    <a class="home-services__button az-button az-button--medium" href="<?php echo esc_url($attrs['buttonUrl']); ?>" <?php echo !empty($attrs['buttonNewTab']) ? 'target="_blank" rel="noopener noreferrer"' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
+                    <a class="home-services__button" href="<?php echo esc_url($attrs['buttonUrl']); ?>" <?php echo !empty($attrs['buttonNewTab']) ? 'target="_blank" rel="noopener noreferrer"' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
                         <?php echo esc_html($attrs['buttonLabel']); ?>
                     </a>
                 <?php else : ?>
-                    <span class="home-services__button az-button az-button--medium"><?php echo esc_html($attrs['buttonLabel']); ?></span>
+                    <span class="home-services__button"><?php echo esc_html($attrs['buttonLabel']); ?></span>
                 <?php endif; ?>
             <?php endif; ?>
         </div>

@@ -79,6 +79,7 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'service-psg-supp
                         </div>
                     <?php endforeach; ?>
                 </div>
+                <div class="service-psg-support__divider"></div>
                 <?php if (trim((string) $attrs['badgeImageUrl']) !== '') : ?>
                     <img class="service-psg-support__badge" src="<?php echo esc_url($attrs['badgeImageUrl']); ?>" alt="<?php echo esc_attr($attrs['badgeImageAlt']); ?>" loading="lazy" decoding="async">
                 <?php endif; ?>
