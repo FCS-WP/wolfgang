@@ -1,30 +1,36 @@
 import { InspectorControls, MediaUpload, MediaUploadCheck, RichText, useBlockProps, useSettings } from "@wordpress/block-editor";
-import { BaseControl, Button, ColorPalette, PanelBody, RangeControl, TextControl } from "@wordpress/components";
+import { BaseControl, Button, ColorPalette, PanelBody, RangeControl, TextControl, ToggleControl } from "@wordpress/components";
 import { useState } from "@wordpress/element";
 import { SectionControls, getSectionClassName, getSectionStyle } from "../_shared/section-controls.js";
 
 const asImages = (images) => (Array.isArray(images) ? images : []);
-const getItemClassName = (index, activeIndex, total) => {
-	const rawOffset = (index - activeIndex + total) % total;
-	let className = "our-culture__item";
 
-	if (index === activeIndex) {
-		className += " is-active";
-	} else if (rawOffset === 1) {
-		className += " is-offset-plus-1";
-	} else if (rawOffset === 2) {
-		className += " is-offset-plus-2";
-	} else if (rawOffset === 3) {
-		className += " is-offset-plus-3";
-	} else if (rawOffset === total - 1) {
-		className += " is-offset-minus-1";
-	} else if (rawOffset === total - 2) {
-		className += " is-offset-minus-2";
-	} else {
-		className += " is-hidden";
+const getOrbitItemStyle = (index, activeIndex, total) => {
+	if (!total) {
+		return {};
 	}
 
-	return className;
+	const angle = ((index - activeIndex) / total) * Math.PI * 2 + Math.PI / 2;
+	const baseWidth = Math.max(88, Math.min(220, 980 / Math.max(total, 5)));
+	const radiusX = Math.max(220, Math.min(440, 220 + total * 12));
+	const radiusY = Math.max(72, Math.min(170, 98 + total * 3));
+	const x = Math.cos(angle) * radiusX;
+	const y = Math.sin(angle) * radiusY;
+	const depth = (y / radiusY + 1) / 2;
+	const scale = 0.54 + depth * 0.46;
+	const opacity = 0.22 + depth * 0.78;
+	const overlayOpacity = index === activeIndex ? 0 : Math.max(0.12, 0.62 - depth * 0.42);
+	const zIndex = 10 + Math.round(depth * 40);
+
+	return {
+		"--our-culture-item-x": `${x}px`,
+		"--our-culture-item-y": `${y}px`,
+		"--our-culture-item-scale": scale,
+		"--our-culture-item-opacity": opacity,
+		"--our-culture-item-z": zIndex,
+		"--our-culture-item-overlay-opacity": overlayOpacity,
+		"--our-culture-item-base-width": `${baseWidth}px`,
+	};
 };
 
 export default function Edit({ attributes, setAttributes }) {
@@ -48,6 +54,20 @@ export default function Edit({ attributes, setAttributes }) {
 			<InspectorControls>
 				<PanelBody title="Carousel" initialOpen={true}>
 					<RangeControl label="Image height" value={attributes.imageHeight} min={220} max={520} step={10} onChange={(imageHeight) => setAttributes({ imageHeight })} />
+					<ToggleControl
+						label="Auto run"
+						checked={Boolean(attributes.autoRun)}
+						onChange={(autoRun) => setAttributes({ autoRun })}
+					/>
+					<RangeControl
+						label="Auto run delay"
+						help="Time between rotations."
+						value={attributes.autoRunDelay || 3200}
+						min={1500}
+						max={9000}
+						step={100}
+						onChange={(autoRunDelay) => setAttributes({ autoRunDelay })}
+					/>
 					<BaseControl label="Heading start color">
 						<ColorPalette colors={themePalette || []} value={attributes.accentStartColor} onChange={(accentStartColor) => setAttributes({ accentStartColor: accentStartColor || "" })} clearable />
 					</BaseControl>
@@ -90,9 +110,10 @@ export default function Edit({ attributes, setAttributes }) {
 					<div className="our-culture__gallery" aria-label="Culture gallery">
 						{images.length ? images.map((image, index) => (
 							<button
-								className={getItemClassName(index, activeIndex, images.length)}
+								className={`our-culture__item${index === activeIndex ? " is-active" : ""}`}
 								key={index}
 								onClick={() => setActiveIndex(index)}
+								style={getOrbitItemStyle(index, activeIndex, images.length)}
 								type="button"
 							>
 								<div className="our-culture__overlay" />
