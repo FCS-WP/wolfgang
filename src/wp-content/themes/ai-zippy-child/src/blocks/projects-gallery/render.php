@@ -1,6 +1,64 @@
 <?php
 defined('ABSPATH') || exit;
 
+if (!function_exists('ai_zippy_child_projects_gallery_youtube_id')) {
+    function ai_zippy_child_projects_gallery_youtube_id($url) {
+        $url = trim((string) $url);
+
+        if ($url === '') {
+            return '';
+        }
+
+        $parts = wp_parse_url($url);
+
+        if (!is_array($parts) || empty($parts['host'])) {
+            return '';
+        }
+
+        $host = preg_replace('/^www\./', '', strtolower((string) $parts['host']));
+        $path = isset($parts['path']) ? trim((string) $parts['path'], '/') : '';
+
+        if ($host === 'youtu.be') {
+            $segments = explode('/', $path);
+            return sanitize_key($segments[0] ?? '');
+        }
+
+        if (in_array($host, ['youtube.com', 'm.youtube.com', 'music.youtube.com'], true)) {
+            if ($path === 'watch' && !empty($parts['query'])) {
+                parse_str($parts['query'], $query);
+                return sanitize_key($query['v'] ?? '');
+            }
+
+            $segments = explode('/', $path);
+            if (in_array($segments[0] ?? '', ['embed', 'shorts', 'live'], true)) {
+                return sanitize_key($segments[1] ?? '');
+            }
+        }
+
+        return '';
+    }
+}
+
+if (!function_exists('ai_zippy_child_projects_gallery_embed_html')) {
+    function ai_zippy_child_projects_gallery_embed_html($html) {
+        return wp_kses((string) $html, [
+            'iframe' => [
+                'src' => true,
+                'title' => true,
+                'width' => true,
+                'height' => true,
+                'allow' => true,
+                'allowfullscreen' => true,
+                'frameborder' => true,
+                'loading' => true,
+                'referrerpolicy' => true,
+                'class' => true,
+                'style' => true,
+            ],
+        ]);
+    }
+}
+
 $attrs = wp_parse_args($attributes ?? [], [
     'layout' => 'boxed',
     'backgroundColor' => '#000000',
@@ -89,23 +147,49 @@ $wrapper_attributes = get_block_wrapper_attributes([
                 <?php echo $tab_index === 0 ? '' : 'hidden'; ?>
             >
                 <div class="projects-gallery__grid">
-                    <?php if ($items) : foreach ($items as $item) : $item = wp_parse_args((array) $item, ['type' => 'image', 'url' => '', 'alt' => '', 'title' => '']); ?>
-                        <?php if (trim((string) $item['url']) === '') { continue; } ?>
-                        <?php $type = $item['type'] === 'video' ? 'video' : 'image'; ?>
-                        <button
-                            class="projects-gallery__item projects-gallery__item--<?php echo esc_attr($type); ?>"
-                            type="button"
-                            data-projects-media-type="<?php echo esc_attr($type); ?>"
-                            data-projects-media-url="<?php echo esc_url($item['url']); ?>"
-                            data-projects-media-alt="<?php echo esc_attr($item['alt']); ?>"
-                        >
-                            <?php if ($type === 'video') : ?>
-                                <video src="<?php echo esc_url($item['url']); ?>" muted playsinline preload="metadata"></video>
-                                <span class="projects-gallery__play" aria-hidden="true"></span>
-                            <?php else : ?>
-                                <img src="<?php echo esc_url($item['url']); ?>" alt="<?php echo esc_attr($item['alt']); ?>" loading="lazy" decoding="async">
-                            <?php endif; ?>
-                        </button>
+                    <?php if ($items) : foreach ($items as $item) : $item = wp_parse_args((array) $item, ['type' => 'image', 'url' => '', 'embedUrl' => '', 'thumbnail' => '', 'html' => '', 'alt' => '', 'title' => '']); ?>
+                        <?php
+                        $type = in_array($item['type'], ['video', 'youtube', 'embed'], true) ? $item['type'] : 'image';
+                        $embed_html = $type === 'embed' ? ai_zippy_child_projects_gallery_embed_html($item['html']) : '';
+                        if ($type === 'embed' && trim($embed_html) === '') {
+                            continue;
+                        }
+                        if ($type !== 'embed' && trim((string) $item['url']) === '') {
+                            continue;
+                        }
+                        $youtube_id = $type === 'youtube' ? ai_zippy_child_projects_gallery_youtube_id($item['url']) : '';
+                        if ($type === 'youtube' && $youtube_id === '') {
+                            continue;
+                        }
+                        $embed_url = $type === 'youtube' ? 'https://www.youtube.com/embed/' . $youtube_id : '';
+                        $thumb_url = $type === 'youtube' ? ($item['thumbnail'] ?: 'https://i.ytimg.com/vi/' . $youtube_id . '/hqdefault.jpg') : $item['url'];
+                        ?>
+                        <?php if ($type === 'embed') : ?>
+                            <div class="projects-gallery__item projects-gallery__item--embed projects-gallery__item--static">
+                                <?php echo $embed_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+                            </div>
+                        <?php else : ?>
+                            <button
+                                class="projects-gallery__item projects-gallery__item--<?php echo esc_attr($type); ?>"
+                                type="button"
+                                data-projects-media-type="<?php echo esc_attr($type); ?>"
+                                data-projects-media-url="<?php echo esc_url($item['url']); ?>"
+                                <?php if ($embed_url !== '') : ?>
+                                    data-projects-embed-url="<?php echo esc_url($embed_url); ?>"
+                                <?php endif; ?>
+                                data-projects-media-alt="<?php echo esc_attr($item['alt']); ?>"
+                            >
+                                <?php if ($type === 'video') : ?>
+                                    <video src="<?php echo esc_url($item['url']); ?>" muted playsinline preload="metadata"></video>
+                                    <span class="projects-gallery__play" aria-hidden="true"></span>
+                                <?php elseif ($type === 'youtube') : ?>
+                                    <img src="<?php echo esc_url($thumb_url); ?>" alt="<?php echo esc_attr($item['alt']); ?>" loading="lazy" decoding="async">
+                                    <span class="projects-gallery__play" aria-hidden="true"></span>
+                                <?php else : ?>
+                                    <img src="<?php echo esc_url($item['url']); ?>" alt="<?php echo esc_attr($item['alt']); ?>" loading="lazy" decoding="async">
+                                <?php endif; ?>
+                            </button>
+                        <?php endif; ?>
                     <?php endforeach; else : ?>
                         <div class="projects-gallery__empty"><?php esc_html_e('Add project media to this tab.', 'ai-zippy-child'); ?></div>
                     <?php endif; ?>

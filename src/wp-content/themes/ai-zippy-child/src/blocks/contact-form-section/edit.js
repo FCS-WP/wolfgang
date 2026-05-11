@@ -1,5 +1,5 @@
-import { InspectorControls, RichText, useBlockProps } from "@wordpress/block-editor";
-import { PanelBody, RangeControl, SelectControl, TextareaControl, TextControl } from "@wordpress/components";
+import { InspectorControls, MediaUpload, MediaUploadCheck, RichText, useBlockProps } from "@wordpress/block-editor";
+import { Button, PanelBody, RangeControl, SelectControl, TextareaControl, TextControl } from "@wordpress/components";
 import { SectionControls, getSectionClassName, getSectionStyle } from "../_shared/section-controls.js";
 
 const iconOptions = [
@@ -8,10 +8,16 @@ const iconOptions = [
 	{ label: "Location", value: "location" },
 ];
 
-const defaultContact = { icon: "phone", label: "Contact detail", url: "" };
+const defaultContact = { icon: "phone", iconId: 0, iconUrl: "", iconAlt: "", label: "Contact detail", url: "" };
 const asContacts = (contacts) => (Array.isArray(contacts) && contacts.length ? contacts : [defaultContact]).map((contact) => ({ ...defaultContact, ...contact }));
 
-const Icon = ({ name }) => {
+const Icon = ({ contact }) => {
+	if (contact.iconUrl) {
+		return <img className="contact-form-section__icon-img" src={contact.iconUrl} alt="" />;
+	}
+
+	const name = contact.icon;
+
 	if (name === "email") {
 		return <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18v12H3z"/><path d="m3 7 9 7 9-7"/></svg>;
 	}
@@ -32,6 +38,12 @@ export default function Edit({ attributes, setAttributes }) {
 	});
 	const setContacts = (nextContacts) => setAttributes({ contacts: nextContacts });
 	const updateContact = (index, patch) => setContacts(contacts.map((contact, contactIndex) => (contactIndex === index ? { ...contact, ...patch } : contact)));
+	const setContactIcon = (index, media) => updateContact(index, {
+		iconId: media?.id || 0,
+		iconUrl: media?.url || "",
+		iconAlt: media?.alt || media?.title || "",
+	});
+	const removeContactIcon = (index) => updateContact(index, { iconId: 0, iconUrl: "", iconAlt: "" });
 
 	return (
 		<>
@@ -41,6 +53,20 @@ export default function Edit({ attributes, setAttributes }) {
 					{contacts.map((contact, index) => (
 						<div className="contact-form-section-editor__contact" key={index}>
 							<SelectControl label="Icon" value={contact.icon} options={iconOptions} onChange={(icon) => updateContact(index, { icon })} />
+							<MediaUploadCheck>
+								<MediaUpload
+									allowedTypes={["image"]}
+									value={contact.iconId}
+									onSelect={(media) => setContactIcon(index, media)}
+									render={({ open }) => (
+										<div className="contact-form-section-editor__icon-control">
+											{contact.iconUrl ? <img src={contact.iconUrl} alt="" /> : null}
+											<Button variant="secondary" onClick={open}>{contact.iconUrl ? "Replace Media Icon" : "Choose Media Icon"}</Button>
+											{contact.iconUrl ? <Button variant="link" isDestructive onClick={() => removeContactIcon(index)}>Remove Media Icon</Button> : null}
+										</div>
+									)}
+								/>
+							</MediaUploadCheck>
 							<TextControl label="Text" value={contact.label} onChange={(label) => updateContact(index, { label })} />
 							<TextControl label="URL" value={contact.url} onChange={(url) => updateContact(index, { url })} />
 						</div>
@@ -63,7 +89,7 @@ export default function Edit({ attributes, setAttributes }) {
 						<div className="contact-form-section__contacts">
 							{contacts.map((contact, index) => (
 								<div className="contact-form-section__contact" key={index}>
-									<Icon name={contact.icon} />
+									<Icon contact={contact} />
 									<span>{contact.label}</span>
 								</div>
 							))}

@@ -11,6 +11,8 @@ const initTestimonials = (section) => {
 
 	let activeIndex = Math.max(0, slides.findIndex((slide) => slide.classList.contains("is-active")));
 	let timer = null;
+	let touchStartX = 0;
+	let touchStartY = 0;
 	const autoplay = section.dataset.autoplay === "true";
 	const delay = Number(section.dataset.autoplayDelay) || 6000;
 
@@ -58,6 +60,34 @@ const initTestimonials = (section) => {
 			start();
 		});
 	});
+	track.addEventListener("touchstart", (event) => {
+		const touch = event.changedTouches?.[0];
+		if (!touch) {
+			return;
+		}
+
+		touchStartX = touch.clientX;
+		touchStartY = touch.clientY;
+		stop();
+	}, { passive: true });
+	track.addEventListener("touchend", (event) => {
+		const touch = event.changedTouches?.[0];
+		if (!touch) {
+			start();
+			return;
+		}
+
+		const deltaX = touch.clientX - touchStartX;
+		const deltaY = touch.clientY - touchStartY;
+		const absX = Math.abs(deltaX);
+		const absY = Math.abs(deltaY);
+
+		if (absX > 36 && absX > absY) {
+			goTo(activeIndex + (deltaX < 0 ? 1 : -1));
+		}
+
+		start();
+	}, { passive: true });
 	section.addEventListener("mouseenter", stop);
 	section.addEventListener("mouseleave", start);
 	section.addEventListener("focusin", stop);

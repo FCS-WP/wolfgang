@@ -13,9 +13,9 @@ $attrs = wp_parse_args($attributes ?? [], [
     'marginBottom' => 0,
     'heading' => 'Lets Make<br>Something<br>Awesome<br>Together.',
     'contacts' => [
-        ['icon' => 'phone', 'label' => '65 1234 5678', 'url' => 'tel:+6512345678'],
-        ['icon' => 'email', 'label' => 'care@ethoscreatives.com', 'url' => 'mailto:care@ethoscreatives.com'],
-        ['icon' => 'location', 'label' => '51 Bras Basah Rd, Singapore 189554', 'url' => ''],
+        ['icon' => 'phone', 'iconId' => 0, 'iconUrl' => '', 'iconAlt' => '', 'label' => '65 1234 5678', 'url' => 'tel:+6512345678'],
+        ['icon' => 'email', 'iconId' => 0, 'iconUrl' => '', 'iconAlt' => '', 'label' => 'care@ethoscreatives.com', 'url' => 'mailto:care@ethoscreatives.com'],
+        ['icon' => 'location', 'iconId' => 0, 'iconUrl' => '', 'iconAlt' => '', 'label' => '51 Bras Basah Rd, Singapore 189554', 'url' => ''],
     ],
     'embedHtml' => '[custom_form submit_text="Submit"]
 [form_input type="text" label="First name" required="true" width="50%"]
@@ -68,7 +68,18 @@ $allowed_html = [
     'br' => [],
 ];
 
-$render_icon = static function (string $icon): void {
+$render_icon = static function (array $contact): void {
+    if (!empty($contact['iconUrl'])) {
+        printf(
+            '<img class="contact-form-section__icon-img" src="%s" alt="%s" loading="lazy" decoding="async">',
+            esc_url((string) $contact['iconUrl']),
+            esc_attr((string) ($contact['iconAlt'] ?? ''))
+        );
+        return;
+    }
+
+    $icon = (string) ($contact['icon'] ?? 'phone');
+
     if ($icon === 'email') {
         echo '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M3 6h18v12H3z"/><path d="m3 7 9 7 9-7"/></svg>';
         return;
@@ -92,11 +103,11 @@ $wrapper_attributes = get_block_wrapper_attributes(['class' => 'contact-form-sec
                 <h2 class="contact-form-section__heading"><?php echo wp_kses_post($attrs['heading']); ?></h2>
             <?php endif; ?>
             <div class="contact-form-section__contacts">
-                <?php foreach ($contacts as $contact) : $contact = wp_parse_args((array) $contact, ['icon' => 'phone', 'label' => '', 'url' => '']); ?>
+                <?php foreach ($contacts as $contact) : $contact = wp_parse_args((array) $contact, ['icon' => 'phone', 'iconId' => 0, 'iconUrl' => '', 'iconAlt' => '', 'label' => '', 'url' => '']); ?>
                     <?php if (trim((string) $contact['label']) === '') { continue; } ?>
                     <?php $tag = trim((string) $contact['url']) !== '' ? 'a' : 'span'; ?>
                     <<?php echo tag_escape($tag); ?> class="contact-form-section__contact" <?php echo $tag === 'a' ? 'href="' . esc_url($contact['url']) . '"' : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>>
-                        <?php $render_icon((string) $contact['icon']); ?>
+                        <?php $render_icon($contact); ?>
                         <span><?php echo esc_html($contact['label']); ?></span>
                     </<?php echo tag_escape($tag); ?>>
                 <?php endforeach; ?>

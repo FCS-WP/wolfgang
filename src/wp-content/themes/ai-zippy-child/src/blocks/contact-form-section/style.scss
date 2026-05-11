@@ -44,10 +44,12 @@
 	text-decoration: none;
 }
 
-.contact-form-section__contact svg {
+.contact-form-section__contact svg,
+.contact-form-section__icon-img {
 	fill: #c8ff9a;
 	flex: 0 0 auto;
 	height: 26px;
+	object-fit: contain;
 	stroke: #c8ff9a;
 	stroke-linecap: round;
 	stroke-linejoin: round;

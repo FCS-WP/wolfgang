@@ -11,15 +11,45 @@ const initJourney = (section) => {
 	let maxTranslate = 0;
 	let itemOffsets = [];
 	let ticking = false;
+	let mobileTicking = false;
 
 	const isHorizontalMode = () => window.matchMedia("(min-width: 901px) and (prefers-reduced-motion: no-preference)").matches;
+	const isMobileSlideMode = () => window.matchMedia("(max-width: 900px)").matches;
+
+	const updateMobileActive = () => {
+		if (!isMobileSlideMode()) {
+			return;
+		}
+
+		const viewportRect = viewport.getBoundingClientRect();
+		const viewportCenter = viewportRect.left + viewportRect.width / 2;
+		let activeIndex = 0;
+		let closestDistance = Number.POSITIVE_INFINITY;
+
+		items.forEach((item, index) => {
+			const itemRect = item.getBoundingClientRect();
+			const itemCenter = itemRect.left + itemRect.width / 2;
+			const distance = Math.abs(viewportCenter - itemCenter);
+
+			if (distance < closestDistance) {
+				closestDistance = distance;
+				activeIndex = index;
+			}
+		});
+
+		items.forEach((item, index) => item.classList.toggle("is-active", index === activeIndex));
+	};
 
 	const measure = () => {
 		if (!isHorizontalMode()) {
 			section.style.removeProperty("--our-journey-scroll-height");
 			section.style.removeProperty("--our-journey-line-width");
 			section.style.removeProperty("--our-journey-translate");
-			items.forEach((item) => item.classList.remove("is-active"));
+			if (isMobileSlideMode()) {
+				updateMobileActive();
+			} else {
+				items.forEach((item) => item.classList.remove("is-active"));
+			}
 			return;
 		}
 
@@ -64,10 +94,36 @@ const initJourney = (section) => {
 		});
 	};
 
+	const requestMobileUpdate = () => {
+		if (mobileTicking) {
+			return;
+		}
+		mobileTicking = true;
+		window.requestAnimationFrame(() => {
+			mobileTicking = false;
+			updateMobileActive();
+		});
+	};
+
+	items.forEach((item) => {
+		item.addEventListener("click", () => {
+			if (!isMobileSlideMode()) {
+				return;
+			}
+
+			item.scrollIntoView({
+				behavior: "smooth",
+				block: "nearest",
+				inline: "center",
+			});
+		});
+	});
+
 	measure();
 	window.addEventListener("scroll", requestUpdate, { passive: true });
 	window.addEventListener("resize", measure);
 	window.addEventListener("load", measure);
+	viewport.addEventListener("scroll", requestMobileUpdate, { passive: true });
 };
 
 document.addEventListener("DOMContentLoaded", () => {

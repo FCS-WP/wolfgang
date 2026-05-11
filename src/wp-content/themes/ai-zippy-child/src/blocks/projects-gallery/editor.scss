@@ -19,9 +19,22 @@
 }
 
 .projects-gallery-editor__item img,
-.projects-gallery-editor__item video {
+.projects-gallery-editor__item video,
+.projects-gallery-editor__embed {
 	aspect-ratio: 1;
 	display: block;
 	object-fit: cover;
 	width: 100%;
+}
+
+.projects-gallery-editor__embed {
+	align-items: center;
+	background: #1f1f1f;
+	color: #fff;
+	display: flex;
+	font-size: 11px;
+	font-weight: 700;
+	justify-content: center;
+	text-align: center;
+	text-transform: uppercase;
 }

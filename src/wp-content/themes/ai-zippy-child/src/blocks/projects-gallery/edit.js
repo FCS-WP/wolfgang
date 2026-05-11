@@ -1,5 +1,5 @@
 import { InspectorControls, MediaUpload, MediaUploadCheck, RichText, useBlockProps } from "@wordpress/block-editor";
-import { Button, PanelBody, RangeControl, TextControl } from "@wordpress/components";
+import { Button, PanelBody, RangeControl, TextareaControl, TextControl } from "@wordpress/components";
 import { useState } from "@wordpress/element";
 import { SectionControls, getSectionClassName, getSectionStyle } from "../_shared/section-controls.js";
 
@@ -24,9 +24,21 @@ const mediaToItem = (media) => {
 	};
 };
 
+const embedToItem = (html) => {
+	return {
+		id: 0,
+		type: "embed",
+		url: "",
+		html: (html || "").trim(),
+		alt: "",
+		title: "",
+	};
+};
+
 export default function Edit({ attributes, setAttributes }) {
 	const tabs = asTabs(attributes.tabs);
 	const [activeTab, setActiveTab] = useState(0);
+	const [embedInputs, setEmbedInputs] = useState({});
 	const activeIndex = Math.min(activeTab, tabs.length - 1);
 	const blockProps = useBlockProps({
 		className: getSectionClassName("projects-gallery", attributes),
@@ -42,6 +54,16 @@ export default function Edit({ attributes, setAttributes }) {
 	const addItems = (index, media) => {
 		const selected = Array.isArray(media) ? media : [media];
 		updateTab(index, { items: [...tabs[index].items, ...selected.map(mediaToItem)] });
+	};
+	const addEmbedItem = (index) => {
+		const item = embedToItem(embedInputs[index] || "");
+
+		if (!item.html) {
+			return;
+		}
+
+		updateTab(index, { items: [...tabs[index].items, item] });
+		setEmbedInputs({ ...embedInputs, [index]: "" });
 	};
 	const removeItem = (tabIndex, itemIndex) => {
 		updateTab(tabIndex, { items: tabs[tabIndex].items.filter((_, index) => index !== itemIndex) });
@@ -66,10 +88,20 @@ export default function Edit({ attributes, setAttributes }) {
 									render={({ open }) => <Button variant="secondary" onClick={open}>Add Images / Videos</Button>}
 								/>
 							</MediaUploadCheck>
+							<TextareaControl
+								label="Embed HTML"
+								help="Paste iframe embed code, for example from YouTube."
+								placeholder='<iframe src="https://www.youtube.com/embed/..."></iframe>'
+								value={embedInputs[tabIndex] || ""}
+								onChange={(html) => setEmbedInputs({ ...embedInputs, [tabIndex]: html })}
+							/>
+							<Button variant="secondary" disabled={!(embedInputs[tabIndex] || "").trim()} onClick={() => addEmbedItem(tabIndex)}>
+								Add Embed
+							</Button>
 							<div className="projects-gallery-editor__items">
 								{tab.items.map((item, itemIndex) => (
 									<div className="projects-gallery-editor__item" key={itemIndex}>
-										{item.type === "video" ? <video src={item.url} muted playsInline /> : <img src={item.url} alt="" />}
+										{item.type === "video" ? <video src={item.url} muted playsInline /> : item.type === "embed" ? <div className="projects-gallery-editor__embed">HTML Embed</div> : <img src={item.thumbnail || item.url} alt="" />}
 										<Button variant="link" isDestructive onClick={() => removeItem(tabIndex, itemIndex)}>Remove</Button>
 									</div>
 								))}
@@ -97,8 +129,8 @@ export default function Edit({ attributes, setAttributes }) {
 					<div className="projects-gallery__grid">
 						{tabs[activeIndex].items.length ? tabs[activeIndex].items.map((item, itemIndex) => (
 							<div className={`projects-gallery__item projects-gallery__item--${item.type}`} key={itemIndex}>
-								{item.type === "video" ? <video src={item.url} muted playsInline preload="metadata" /> : <img src={item.url} alt="" />}
-								{item.type === "video" ? <span className="projects-gallery__play" aria-hidden="true" /> : null}
+								{item.type === "video" ? <video src={item.url} muted playsInline preload="metadata" /> : item.type === "embed" ? <span className="projects-gallery__embed-preview">Embed</span> : <img src={item.thumbnail || item.url} alt="" />}
+								{item.type === "video" || item.type === "youtube" ? <span className="projects-gallery__play" aria-hidden="true" /> : null}
 							</div>
 						)) : <div className="projects-gallery__empty">Add project media to this tab.</div>}
 					</div>

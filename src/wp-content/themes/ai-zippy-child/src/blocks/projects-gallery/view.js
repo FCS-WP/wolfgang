@@ -29,11 +29,44 @@ const createLightbox = () => {
 		const item = state.items[state.index];
 		const type = item.dataset.projectsMediaType;
 		const url = item.dataset.projectsMediaUrl;
+		const embedUrl = item.dataset.projectsEmbedUrl;
+		const embedHtml = item.dataset.projectsEmbedHtml;
 		const alt = item.dataset.projectsMediaAlt || "";
 
-		media.innerHTML = type === "video"
-			? `<video src="${url}" controls autoplay playsinline></video>`
-			: `<img src="${url}" alt="${alt}">`;
+		media.innerHTML = "";
+
+		if (type === "video") {
+			const video = document.createElement("video");
+			video.src = url;
+			video.controls = true;
+			video.autoplay = true;
+			video.playsInline = true;
+			media.appendChild(video);
+			return;
+		}
+
+		if (type === "youtube" && embedUrl) {
+			const iframe = document.createElement("iframe");
+			const separator = embedUrl.includes("?") ? "&" : "?";
+			iframe.src = `${embedUrl}${separator}autoplay=1&rel=0`;
+			iframe.title = alt || "YouTube video";
+			iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
+			iframe.allowFullscreen = true;
+			media.appendChild(iframe);
+			return;
+		}
+
+		if (type === "embed" && embedHtml) {
+			const template = document.createElement("template");
+			template.innerHTML = embedHtml.trim();
+			media.appendChild(template.content.cloneNode(true));
+			return;
+		}
+
+		const image = document.createElement("img");
+		image.src = url;
+		image.alt = alt;
+		media.appendChild(image);
 	};
 	const move = (direction) => {
 		const state = lightbox._projectsGalleryState;
