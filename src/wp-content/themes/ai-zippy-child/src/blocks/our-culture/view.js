@@ -1,6 +1,36 @@
 const getOrbitValues = (gallery, total, index, activeIndex) => {
 	const galleryWidth = gallery.clientWidth || 1180;
 	const isMobile = window.matchMedia("(max-width: 767px)").matches;
+	const prevIndex = (activeIndex - 1 + total) % total;
+	const nextIndex = (activeIndex + 1) % total;
+	const imageHeight = Number.parseFloat(window.getComputedStyle(gallery).getPropertyValue("--our-culture-image-height")) || 360;
+
+	if (isMobile) {
+		const mainWidth = Math.min(galleryWidth * 0.64, 260);
+		const sideWidth = Math.min(galleryWidth * 0.28, 112);
+		const sideDistance = Math.min(galleryWidth * 0.32, 132);
+		const mainHeight = Math.min(imageHeight * 0.72, 280);
+		const sideHeight = Math.min(imageHeight * 0.42, 160);
+
+		if (index === activeIndex) {
+			return { baseWidth: mainWidth, itemHeight: mainHeight, x: 0, y: 0, scale: 1, opacity: 1, overlayOpacity: 0, zIndex: 40 };
+		}
+
+		if (index === prevIndex || index === nextIndex) {
+			return {
+				baseWidth: sideWidth,
+				itemHeight: sideHeight,
+				x: index === prevIndex ? -sideDistance : sideDistance,
+				y: 10,
+				scale: 1,
+				opacity: 0.68,
+				overlayOpacity: 0.36,
+				zIndex: 20,
+			};
+		}
+
+		return { baseWidth: sideWidth, itemHeight: sideHeight, x: 0, y: 0, scale: 0.72, opacity: 0, overlayOpacity: 0.6, zIndex: 0 };
+	}
 	const baseWidth = isMobile
 		? Math.max(72, Math.min(150, galleryWidth / Math.max(total * 0.95, 3.8)))
 		: Math.max(96, Math.min(260, galleryWidth / Math.max(total * 0.58, 4.2)));
@@ -19,7 +49,7 @@ const getOrbitValues = (gallery, total, index, activeIndex) => {
 	const overlayOpacity = index === activeIndex ? 0 : Math.max(0.12, 0.62 - depth * 0.42);
 	const zIndex = 10 + Math.round(depth * 40);
 
-	return { baseWidth, x, y, scale, opacity, overlayOpacity, zIndex };
+	return { baseWidth, itemHeight: imageHeight, x, y, scale, opacity, overlayOpacity, zIndex };
 };
 
 const initCultureGallery = (section) => {
@@ -37,7 +67,7 @@ const initCultureGallery = (section) => {
 
 	const applyLayout = () => {
 		items.forEach((item, index) => {
-			const { baseWidth, x, y, scale, opacity, overlayOpacity, zIndex } = getOrbitValues(gallery, items.length, index, activeIndex);
+			const { baseWidth, itemHeight, x, y, scale, opacity, overlayOpacity, zIndex } = getOrbitValues(gallery, items.length, index, activeIndex);
 
 			item.classList.toggle("is-active", index === activeIndex);
 			item.style.setProperty("--our-culture-item-x", `${x.toFixed(2)}px`);
@@ -47,6 +77,7 @@ const initCultureGallery = (section) => {
 			item.style.setProperty("--our-culture-item-z", String(zIndex));
 			item.style.setProperty("--our-culture-item-overlay-opacity", overlayOpacity.toFixed(4));
 			item.style.setProperty("--our-culture-item-base-width", `${baseWidth.toFixed(2)}px`);
+			item.style.setProperty("--our-culture-item-height", `${itemHeight.toFixed(2)}px`);
 		});
 	};
 

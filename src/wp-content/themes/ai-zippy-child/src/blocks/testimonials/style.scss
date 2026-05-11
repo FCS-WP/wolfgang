@@ -22,6 +22,7 @@
 	margin-inline: auto;
 	max-width: var(--testimonials-quote-width, 820px);
 	overflow: hidden;
+	touch-action: pan-y;
 	width: 100%;
 }
 

@@ -153,6 +153,10 @@
 }
 
 @media (max-width: 767px) {
+	.service-psg-support__copy {
+		text-align: center;
+		font-size: 20px;
+	}
 	.service-psg-support__heading {
 		font-size: clamp(30px, 10vw, 44px);
 	}

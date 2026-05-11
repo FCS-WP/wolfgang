@@ -4,6 +4,23 @@
 	padding-top: 12px;
 }
 
+.contact-form-section-editor__icon-control {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.contact-form-section-editor__icon-control img {
+	background: #f0f0f0;
+	border-radius: 4px;
+	height: 36px;
+	object-fit: contain;
+	padding: 5px;
+	width: 36px;
+}
+
 .contact-form-section-editor__textarea textarea {
 	font-family: monospace;
 	min-height: 220px;
